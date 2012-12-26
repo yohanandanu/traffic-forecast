@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="prefs">Cài Đặt Cấu Hình</string>
+    <string name="prefs">Cài đặt cấu hình</string>
     <string name="prefs_gps">GPS</string>
-    <string name="prefs_gps_settings">Thiết Lập GPS</string>
+    <string name="prefs_gps_settings">Thiết lập GPS</string>
     <string name="prefs_gps_settings_summary">Hiển thị màn hình cài đặt GPS</string>
     <string name="prefs_gps_time_logging_interval">Thời gian ghi GPS giữa hai lần cập nhật</string>
 	<string name="prefs_gps_time_logging_interval_summary">Tổng thời gian GPS ghi giữa hai lần cập nhật</string>
