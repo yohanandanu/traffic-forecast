@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, GPSActivity!</string>
+    <string name="app_name">Traffic Forecast and Guide</string>
+    <string name="show_current_menu">Show Current</string>
+    <string name="build_route_menu">Build Route</string>
+    <string name="forecast_menu">Forecast</string>
+    <string name="turn_power_menu">Tracking</string>
+    <string name="on">Start Tracking</string>
+    <string name="off">Stop Tracking</string>
+    <string name="trackList_menu">Track List</string>
+    <string name="settings_menu">Settings</string>
+    <string name="button_start">Start Tracking</string>
+    <string name="button_stop">Stop Tracking</string>
+    <string name="menu_settings">Setting</string>
+    <string name="velocity_overlay">Velocity</string>
+    <string name="density_overlay">Density</string>
+    <string name="overlay_ok">OK</string>
+	<string name="show_current_dialog_title">Overlay Selection</string>
+	<string name="dialog_input_direct_title">Input Address</string>
+	<string name="input_direct_mylocation">My Location</string>
+	<string name="input_direct_endpoint">End Point</string>
+	<string name="input_direct_pointonmap">Point on map</string>
+	<string name="setting_gps">Setting GPS</string>
+	<string name="gps_not_enable_yet">GPS is not enabled. Do you want to go to settings menu?</string>
+	<string name="tracking_controls">Tracking Controls</string>
+	<string name="text_minutes">minutes</string>
+	<string name="dialog_forecast_ok">OK</string>
+	<string name="dialog_forecast_title">Enter the time in minutes</string>
+	<string name="listfile_activity_title">List Files GPX Tracking</string>
+	<string name="touch_activity_title">Press on the screen to select point</string>
+	<string name="showtracking_activity_title">Tracking Of User</string>
+	
+</resources>

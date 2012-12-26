@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RadioGroup
+        android:id="@+id/radioOverlay"
+        android:layout_width="255dip"
+        android:checkedButton="@+id/radioVelocity"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/radioVelocity"
+            android:layout_width="250dip"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/velocity_overlay" />
+
+        <RadioButton
+            android:id="@+id/radiodDensity"
+            android:layout_width="250dip"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/density_overlay" />
+    </RadioGroup>    
+    <Button
+        android:id="@+id/btnOk"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/overlay_ok" />
+
+</LinearLayout>

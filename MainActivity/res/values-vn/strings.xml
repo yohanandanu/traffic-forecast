@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Xin Chào, Đây là phần mềm định vị!</string>
+    <string name="app_name">Dự Báo Và Hướng Dẫn Giao Thông</string>
+    <string name="show_current_menu">Hiển Thị</string>
+    <string name="build_route_menu">Tìm Đường</string>
+    <string name="forecast_menu">Dự Báo</string>
+    <string name="turn_power_menu">Theo Vết</string>
+    <string name="on">Bắt Đầu Theo Vết</string>
+    <string name="off">Bắt Đầu Theo Vết</string>
+    <string name="trackList_menu">Danh Sách Theo Dõi</string>
+    <string name="settings_menu">Cài Đặt Cấu Hình</string>
+    <string name="button_start">Bắt Đầu Theo Vết</string>
+    <string name="button_stop">Dừng Theo Vết</string>
+    <string name="menu_settings">Cài Đặt Cấu Hình</string>
+    <string name="velocity_overlay">Vận Tốc</string>
+    <string name="density_overlay">Mật Độ</string>
+    <string name="overlay_ok">Đồng Ý</string>
+    <string name="show_current_dialog_title">Chọn lớp hiển thị</string>
+	<string name="show_input_direct_dialog_title">Nhập địa chỉ</string>
+	<string name="input_direct_mylocation">Vị trí của tôi</string>
+	<string name="input_direct_endpoint">Điểm đến</string>
+	<string name="input_direct_pointonmap">Chạm vào bản đồ</string>
+	<string name="gps_not_enable_yet">GPS hiện tại chưa được bật.Bạn có muốn bật nó lên không?</string>
+	<string name="tracking_controls">Điều khiển chức năng theo dõi</string>
+
+</resources>

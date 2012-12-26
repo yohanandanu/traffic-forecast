@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <PreferenceCategory android:title="@string/prefs_gps" >
+        <Preference
+            android:key="gps.settings"
+            android:summary="@string/prefs_gps_settings_summary"
+            android:title="@string/prefs_gps_settings" >
+        </Preference>
+
+        <EditTextPreference
+            android:defaultValue="10"
+            android:inputType="number"
+            android:key="gps.distance.logging.interval"
+            android:summary="@string/prefs_gps_distance_logging_interval_summary"
+            android:title="@string/prefs_gps_distance_logging_interval" >
+        </EditTextPreference>
+        <EditTextPreference
+            android:defaultValue="15"
+            android:inputType="number"
+            android:key="gps.time.logging.interval"
+            android:summary="@string/prefs_gps_time_logging_interval_summary"
+            android:title="@string/prefs_gps_time_logging_interval" >
+        </EditTextPreference>
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/prefs_server" >    
+        <EditTextPreference
+            android:defaultValue="300"
+            android:inputType="number"
+            android:key="gps.server.address.interval"            
+            android:title="@string/prefs_server_time" >
+        </EditTextPreference>
+    </PreferenceCategory>
+    
+    <PreferenceCategory android:title="@string/prefs_file_settings" >
+        <EditTextPreference
+            android:defaultValue="/GPSTrackingFiles"
+            android:key="ext.storage"
+            android:title="@string/prefs_ext_storage" >
+        </EditTextPreference>
+    </PreferenceCategory>
+
+</PreferenceScreen>
