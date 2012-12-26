@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="prefs">Settings</string>
+    <string name="prefs_gps">GPS</string>
+    <string name="prefs_gps_settings">GPS Settings</string>
+    <string name="prefs_gps_settings_summary">Display GPS settings screen</string>
+    <string name="prefs_gps_time_logging_interval">GPS time logging interval</string>
+	<string name="prefs_gps_time_logging_interval_summary">Time between updates</string>
+	
+	<string name="prefs_server">Server</string>
+	<string name="prefs_server_address">Server Address</string>	
+	<string name="prefs_server_time">Sending data to server interval</string>	
+	<string name="prefs_server_time_interval">seconds</string>
+	
+	<string name="prefs_gps_distance_logging_interval">GPS distance logging interval</string>
+	<string name="prefs_gps_distance_logging_interval_summary">Distance between updates</string>
+	
+	<string name="prefs_gps_logging_interval_seconds">seconds</string>
+	<string name="prefs_gps_logging_interval_meters">meters</string>
+	
+	<string name="prefs_file_settings">File Settings</string>
+	<string name="prefs_ext_storage">External Storage Directory</string>	
+	<string name="prefs_file_extension">File Extension</string>
+	<string name="prefs_file_extension_summary">Choose file extension to store</string>	
+</resources>

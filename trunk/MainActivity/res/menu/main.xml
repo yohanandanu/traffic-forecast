@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    
+    <item 
+        android:id="@+id/showCurrent" 
+        android:orderInCategory="1"
+        android:title="@string/show_current_menu">
+    </item>
+    <item
+        android:id="@+id/buildRoute"
+        android:orderInCategory="2"        
+        android:title="@string/build_route_menu"/>
+    <item
+        android:id="@+id/forecast"
+        android:orderInCategory="3"
+        android:title="@string/forecast_menu"/>
+    <item
+        android:id="@+id/turnPower"
+        android:orderInCategory="4"
+        android:title="@string/turn_power_menu">               
+    </item>
+    <item
+        android:id="@+id/trackList"
+        android:orderInCategory="5"
+        android:title="@string/trackList_menu"/>
+    <item
+        android:id="@+id/settings"
+        android:orderInCategory="6"
+        android:title="@string/settings_menu"/>
+    
+</menu>

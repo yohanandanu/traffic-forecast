@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="prefs">Cài Đặt Cấu Hình</string>
+    <string name="prefs_gps">GPS</string>
+    <string name="prefs_gps_settings">Thiết Lập GPS</string>
+    <string name="prefs_gps_settings_summary">Hiển thị màn hình cài đặt GPS</string>
+    <string name="prefs_gps_time_logging_interval">Thời gian ghi GPS giữa hai lần cập nhật</string>
+	<string name="prefs_gps_time_logging_interval_summary">Tổng thời gian GPS ghi giữa hai lần cập nhật</string>
+	
+	<string name="prefs_server">Máy chủ</string>
+	<string name="prefs_server_address">Địa chỉ máy chủ</string>	
+	<string name="prefs_server_time">Khoảng thời gian gửi dữ liệu cho máy chủ</string>	
+	<string name="prefs_server_time_interval">giây</string>
+	
+	<string name="prefs_gps_distance_logging_interval">Khoảng cách để ghi lại GPS</string>
+	<string name="prefs_gps_distance_logging_interval_summary">Khoảng cách giữ hai lần cập nhật</string>
+	
+	<string name="prefs_gps_logging_interval_seconds">giây</string>
+	<string name="prefs_gps_logging_interval_meters">mét</string>
+	
+	<string name="prefs_file_settings">Cài đặt tập tin</string>
+	<string name="prefs_ext_storage">Đường dẫn bộ nhớ ngoài</string>	
+	<string name="prefs_file_extension">Đuôi mở rộng của tập tin</string>
+	<string name="prefs_file_extension_summary">Chọn kiểu tập tin mở rộng để lưu trữ</string>	
+</resources>
