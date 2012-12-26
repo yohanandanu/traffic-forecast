@@ -25,8 +25,9 @@ public class GPXOverlay extends Overlay {
 	private ArrayList<NodeGPS> data;
 	private MapView mapView;
 	private ShowGPXActivity activity;
-	
-	public GPXOverlay(ShowGPXActivity mainActivity, MapView m_MapView, ArrayList<NodeGPS> data) {
+
+	public GPXOverlay(ShowGPXActivity mainActivity, MapView m_MapView,
+			ArrayList<NodeGPS> data) {
 		// TODO Auto-generated constructor stub
 		activity = mainActivity;
 		this.data = data;
@@ -46,35 +47,15 @@ public class GPXOverlay extends Overlay {
 
 	public boolean draw(Canvas canvas, MapView mapView, boolean shadow,
 			long when) {
+
 		NodeGPS pre = null;
 		NodeGPS cur = null;
 
 		int step = 21 - mapView.getZoomLevel();
+		int n = data.size();
 
-		for (int i = 0; i < data.size();) {
+		for (int i = 0; i < n;) {
 			cur = data.get(i);
-			
-			if(i == 0)
-			{
-				Bitmap bmp = BitmapFactory.decodeResource(
-						activity.getResources(), R.drawable.startpoint);
-				
-				Point screenPts = new Point();
-				GeoPoint p = new GeoPoint((int) (cur.lat * 1E6), (int) (cur.lon * 1E6));
-				mapView.getProjection().toPixels(p , screenPts);
-				canvas.drawBitmap(bmp, screenPts.x -12, screenPts.y  -12, null);
-			}
-			else if(i == data.size()-1)
-			{
-				Bitmap bmp = BitmapFactory.decodeResource(
-						activity.getResources(), R.drawable.endpoint);
-				
-				Point screenPts = new Point();
-				GeoPoint p = new GeoPoint((int) (cur.lat * 1E6), (int) (cur.lon * 1E6));
-				mapView.getProjection().toPixels(p , screenPts);
-				canvas.drawBitmap(bmp, screenPts.x  -12, screenPts.y  -12, null);
-			}
-			
 			if (pre != null && cur != null) {
 				if (pre == cur)
 					break;
@@ -115,9 +96,28 @@ public class GPXOverlay extends Overlay {
 			pre = cur;
 
 			i += step;
-			if (i >= data.size())
-				i = data.size() - 1;
+			if (i >= n)
+				i = n - 1;
 		}
+		final float scale = activity.getResources().getDisplayMetrics().density;
+		//Log.v("dessssssssssssssssssssss", Float.toString(scale));
+		int dip = (int) (8 * scale);
+		cur = data.get(0);
+		Bitmap bmp1 = BitmapFactory.decodeResource(activity.getResources(),
+				R.drawable.startpoint);
+
+		Point screenPts1 = new Point();
+		GeoPoint p1 = new GeoPoint((int) (cur.lat * 1E6), (int) (cur.lon * 1E6));
+		mapView.getProjection().toPixels(p1, screenPts1);
+		canvas.drawBitmap(bmp1, screenPts1.x - dip, screenPts1.y - dip, null);
+
+		Bitmap bmp2 = BitmapFactory.decodeResource(activity.getResources(),
+				R.drawable.endpoint);
+		cur = data.get(n - 1);
+		Point screenPts2 = new Point();
+		GeoPoint p2 = new GeoPoint((int) (cur.lat * 1E6), (int) (cur.lon * 1E6));
+		mapView.getProjection().toPixels(p2, screenPts2);
+		canvas.drawBitmap(bmp2, screenPts2.x - dip, screenPts2.y - dip, null);
 
 		return super.draw(canvas, mapView, shadow, when);
 
