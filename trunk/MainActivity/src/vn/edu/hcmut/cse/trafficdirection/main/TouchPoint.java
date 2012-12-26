@@ -8,20 +8,23 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
+import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
 public class TouchPoint extends MapActivity {
+	private MapView mapview;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_touch_point);
 
-		MapView mapview = (MapView) findViewById(R.id.mapViewTouch);
+		mapview = (MapView) findViewById(R.id.mapViewTouch);
 		mapview.setBuiltInZoomControls(true);
 		MapOverlay mapOverlay = new MapOverlay();
 		List<Overlay> listOfOverlays = mapview.getOverlays();
@@ -68,4 +71,31 @@ public class TouchPoint extends MapActivity {
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
+	@Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        // TODO Auto-generated method stub
+          
+        MapController mc = mapview.getController();
+        switch (keyCode) {
+        case KeyEvent.KEYCODE_I:
+                mc.zoomIn();
+                break;
+        case KeyEvent.KEYCODE_O:
+                mc.zoomOut();
+                break;
+        case KeyEvent.KEYCODE_DPAD_LEFT:
+            mc.scrollBy(-50, 0);
+            break;
+        case KeyEvent.KEYCODE_DPAD_RIGHT:
+            mc.scrollBy(50, 0);
+            break;
+        case KeyEvent.KEYCODE_DPAD_DOWN:
+            mc.scrollBy(0, 50);
+            break;
+        case KeyEvent.KEYCODE_DPAD_UP:
+            mc.scrollBy(0, -50);            
+            break;
+        }            
+        return super.onKeyDown(keyCode, event);
+    }
 }
