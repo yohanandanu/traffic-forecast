@@ -5,13 +5,13 @@
     android:gravity="center_horizontal|center" >
 
     <EditText
-        android:id="@+id/input_time"
+        android:id="@+id/forecast_input_time"
         android:layout_width="60dip"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="50dip"
-        android:inputType="textNoSuggestions" >
+         android:inputType="number" >
 
         <requestFocus />
     </EditText>
@@ -30,7 +30,7 @@
         android:id="@+id/bt_forecast_ok"
         android:layout_width="150dip"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/input_time"
+        android:layout_below="@+id/forecast_input_time"
         android:layout_marginLeft="50dip"
         android:text="@string/dialog_forecast_ok" />
 
