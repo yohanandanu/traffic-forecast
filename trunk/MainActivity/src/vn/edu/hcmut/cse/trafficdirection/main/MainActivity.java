@@ -428,7 +428,6 @@ public class MainActivity extends MapActivity {
 			dialog.setTitle(R.string.dialog_input_direct_title);
 			
 			Button p1 = (Button) dialog.findViewById(R.id.bt_point1);
-			
 			p1.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					Intent it = new Intent(getApplicationContext(),
@@ -438,7 +437,6 @@ public class MainActivity extends MapActivity {
 			});
 			
 			Button p2 = (Button) dialog.findViewById(R.id.bt_point2);
-			
 			p2.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					Intent it = new Intent(getApplicationContext(),
@@ -451,7 +449,38 @@ public class MainActivity extends MapActivity {
 
 			dialogButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					dialog.dismiss();
+					if(Point1 == null)
+					{
+						Toast.makeText(getApplicationContext(), "Please insert start point!!!", Toast.LENGTH_SHORT)
+						.show();
+					}
+					else if(Point2 == null)
+					{
+						Toast.makeText(getApplicationContext(), "Please insert end point!!!", Toast.LENGTH_SHORT)
+						.show();
+					}
+					else
+					{
+						Intent it = new Intent(getApplicationContext(),
+								ShowBuildRouteActivity.class);
+						Bundle extras = new Bundle();
+						extras.putString("POINT1", Point1);
+						extras.putString("POINT2", Point2);
+						it.putExtras(extras);
+						startActivity(it);
+						
+						Point1 = null;
+						Point2 = null;
+						File tmp = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + PATH_TO_TMP_FILE);
+						tmp.delete();
+						try {
+							tmp.createNewFile();
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						dialog.dismiss();
+					}
 				}
 			});
 

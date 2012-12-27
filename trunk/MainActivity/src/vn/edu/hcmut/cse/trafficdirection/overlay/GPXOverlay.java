@@ -3,7 +3,6 @@ package vn.edu.hcmut.cse.trafficdirection.overlay;
 import java.util.ArrayList;
 
 import vn.edu.hcmut.cse.trafficdirection.main.R;
-import vn.edu.hcmut.cse.trafficdirection.main.ShowGPXActivity;
 import vn.edu.hcmut.cse.trafficdirection.node.NodeGPS;
 
 import android.graphics.Bitmap;
@@ -15,6 +14,7 @@ import android.graphics.Path;
 import android.graphics.Point;
 
 import com.google.android.maps.GeoPoint;
+import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 import com.google.android.maps.Projection;
@@ -24,9 +24,9 @@ public class GPXOverlay extends Overlay {
 	private Projection project;
 	private ArrayList<NodeGPS> data;
 	private MapView mapView;
-	private ShowGPXActivity activity;
+	private MapActivity activity;
 
-	public GPXOverlay(ShowGPXActivity mainActivity, MapView m_MapView,
+	public GPXOverlay(MapActivity mainActivity, MapView m_MapView,
 			ArrayList<NodeGPS> data) {
 		// TODO Auto-generated constructor stub
 		activity = mainActivity;
