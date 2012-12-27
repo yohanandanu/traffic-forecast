@@ -4,7 +4,7 @@
     android:layout_height="fill_parent">
  
     <com.google.android.maps.MapView 
-        android:id="@+id/mapView"
+        android:id="@+id/mapViewBuildRoute"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:enabled="true"
@@ -16,7 +16,7 @@
 		android:layout_height="fill_parent" 
 		android:orientation="vertical"
 		android:gravity="bottom|center"			 
-		android:id="@+id/layout_MainMenu" 
+		android:id="@+id/layout_MainMenuBuildRoute" 
 		android:visibility="visible"> 		
 	</LinearLayout>
 	
