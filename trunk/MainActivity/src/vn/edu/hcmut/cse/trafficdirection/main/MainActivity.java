@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-
 import vn.edu.hcmut.cse.trafficdirection.database.DatabaseHelper;
 import vn.edu.hcmut.cse.trafficdirection.network.TCPClient;
 import vn.edu.hcmut.cse.trafficdirection.node.DrawableStreet;
@@ -93,9 +92,9 @@ public class MainActivity extends MapActivity {
 	private String GPXfile = null;
 	private String Point1 = null;
 	private String Point2 = null;
-	
+
 	Dialog dialog;// = new Dialog(MainActivity.this,R.style.OverLayDialog);
-	
+
 	File nodeSQLFile = null;
 	File streetSQLFile = null;
 
@@ -112,8 +111,8 @@ public class MainActivity extends MapActivity {
 	public ArrayList<DrawableStreet> streetList2 = new ArrayList<DrawableStreet>();
 
 	public int zoomLevel;
-	
-	//private Random r;
+
+	// private Random r;
 
 	@SuppressWarnings("deprecation")
 	@Override
@@ -169,9 +168,7 @@ public class MainActivity extends MapActivity {
 				e.printStackTrace();
 			}
 
-		}
-		else
-		{
+		} else {
 			tmp.delete();
 			try {
 				tmp.createNewFile();
@@ -183,8 +180,8 @@ public class MainActivity extends MapActivity {
 
 		tcpClient = new TCPClient(md);
 		tcpClient.start();
-		
-		dialog = new Dialog(MainActivity.this,R.style.DialogTitleStyle);
+
+		dialog = new Dialog(MainActivity.this, R.style.DialogTitleStyle);
 
 		m_MapView = (MapView) findViewById(R.id.mapView);
 		LinearLayout zoomLayout = (LinearLayout) findViewById(R.id.layout_MainMenu);
@@ -306,9 +303,8 @@ public class MainActivity extends MapActivity {
 			node.setLat(cursor.getFloat(2));
 			node.setLon(cursor.getFloat(3));
 			node.setSpeed(cursor.getString(5));
-			if (node.getSpeed().equals(""))
-			{
-				//float v = (float) (r.nextFloat()*30.0);
+			if (node.getSpeed().equals("")) {
+				// float v = (float) (r.nextFloat()*30.0);
 				node.setSpeed("10.0");
 			}
 			node.setDensity(cursor.getString(6));
@@ -339,30 +335,25 @@ public class MainActivity extends MapActivity {
 		// TODO Auto-generated method stub
 		if (isShowCurrent) {
 			m_MapView.postInvalidate();
-			
+
 			updateStreet();
 			count = (count + 1) % 2;
 		}
 	}
 
-	/*private void showGPX(String file) {
-		// TODO Auto-generated method stub
-		GPXReader r = new GPXReader(file);
-		r.readXMLfromResource(this);
-
-		try {
-			r.parseStructure();
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		}
-
-		GPXOverlay mapOverlay = new GPXOverlay(this, m_MapView, r.handler.data);
-		List<Overlay> listOfOverlay = m_MapView.getOverlays();
-		listOfOverlay.clear();
-		listOfOverlay.add(mapOverlay);
-
-		m_MapView.invalidate();
-	}*/
+	/*
+	 * private void showGPX(String file) { // TODO Auto-generated method stub
+	 * GPXReader r = new GPXReader(file); r.readXMLfromResource(this);
+	 * 
+	 * try { r.parseStructure(); } catch (ParserConfigurationException e) {
+	 * e.printStackTrace(); }
+	 * 
+	 * GPXOverlay mapOverlay = new GPXOverlay(this, m_MapView, r.handler.data);
+	 * List<Overlay> listOfOverlay = m_MapView.getOverlays();
+	 * listOfOverlay.clear(); listOfOverlay.add(mapOverlay);
+	 * 
+	 * m_MapView.invalidate(); }
+	 */
 
 	private void showSettingsAlert() {
 		// TODO Auto-generated method stub
@@ -373,8 +364,7 @@ public class MainActivity extends MapActivity {
 		alertDialog.setTitle(R.string.setting_gps);
 
 		// Setting Dialog Message
-		alertDialog
-				.setMessage(R.string.gps_not_enable_yet);
+		alertDialog.setMessage(R.string.gps_not_enable_yet);
 
 		// On pressing Settings button
 		alertDialog.setPositiveButton("Settings",
@@ -421,12 +411,12 @@ public class MainActivity extends MapActivity {
 			startActivity(new Intent(MainActivity.this, Preferences.class));
 			break;
 		case R.id.buildRoute:
-			
-			Toast.makeText(getApplicationContext(), "Build Route is Selected",
-					Toast.LENGTH_SHORT).show();
+
+//			Toast.makeText(getApplicationContext(), "Build Route is Selected",
+//					Toast.LENGTH_SHORT).show();
 			dialog.setContentView(R.layout.dialog_directions_input);
 			dialog.setTitle(R.string.dialog_input_direct_title);
-			
+
 			Button p1 = (Button) dialog.findViewById(R.id.bt_point1);
 			p1.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
@@ -435,7 +425,7 @@ public class MainActivity extends MapActivity {
 					startActivity(it);
 				}
 			});
-			
+
 			Button p2 = (Button) dialog.findViewById(R.id.bt_point2);
 			p2.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
@@ -445,22 +435,19 @@ public class MainActivity extends MapActivity {
 				}
 			});
 
-			Button dialogButton = (Button) dialog.findViewById(R.id.bt_direction);
+			Button dialogButton = (Button) dialog
+					.findViewById(R.id.bt_direction);
 
 			dialogButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
-					if(Point1 == null)
-					{
-						Toast.makeText(getApplicationContext(), "Please insert start point!!!", Toast.LENGTH_SHORT)
-						.show();
-					}
-					else if(Point2 == null)
-					{
-						Toast.makeText(getApplicationContext(), "Please insert end point!!!", Toast.LENGTH_SHORT)
-						.show();
-					}
-					else
-					{
+					if (Point1 == null) {
+						Toast.makeText(getApplicationContext(),R.string.please_input_startpoint,
+								Toast.LENGTH_SHORT).show();
+					} else if (Point2 == null) {
+						Toast.makeText(getApplicationContext(),
+								R.string.please_input_endpoint,
+								Toast.LENGTH_SHORT).show();
+					} else {
 						Intent it = new Intent(getApplicationContext(),
 								ShowBuildRouteActivity.class);
 						Bundle extras = new Bundle();
@@ -468,10 +455,13 @@ public class MainActivity extends MapActivity {
 						extras.putString("POINT2", Point2);
 						it.putExtras(extras);
 						startActivity(it);
-						
+
 						Point1 = null;
 						Point2 = null;
-						File tmp = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + PATH_TO_TMP_FILE);
+						File tmp = new File(Environment
+								.getExternalStorageDirectory()
+								.getAbsolutePath()
+								+ PATH_TO_TMP_FILE);
 						tmp.delete();
 						try {
 							tmp.createNewFile();
@@ -487,15 +477,32 @@ public class MainActivity extends MapActivity {
 			dialog.show();
 			break;
 		case R.id.forecast:
-			Toast.makeText(getApplicationContext(), "Forecast is Selected",
-					Toast.LENGTH_SHORT).show();
-			final Dialog dialogForecast = new Dialog(MainActivity.this,R.style.DialogTitleStyle);
+//			Toast.makeText(getApplicationContext(), "Forecast is Selected",
+//					Toast.LENGTH_SHORT).show();
+			final Dialog dialogForecast = new Dialog(MainActivity.this,
+					R.style.DialogTitleStyle);
 			dialogForecast.setContentView(R.layout.dialog_forecast);
 			dialogForecast.setTitle(R.string.dialog_forecast_title);
-			Button dlButton = (Button) dialogForecast.findViewById(R.id.bt_forecast_ok);
+			Button dlButton = (Button) dialogForecast
+					.findViewById(R.id.bt_forecast_ok);
 
 			dlButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
+//					EditText mEdit   = (EditText)findViewById(R.id.forecast_input_time);
+//					if(mEdit == null)
+//					Log.v("ddddddddddddddddddddddd","sssssssssssssssssssssssssssssss");
+//					String minutes = mEdit.getText().toString();
+//					if(minutes == null)
+//					{
+//						
+//						Toast.makeText(getApplicationContext(), R.string.please_input_time,
+//								Toast.LENGTH_SHORT).show();
+//					}
+//					if (Integer.parseInt(minutes) < 10 || Integer.parseInt(minutes) > 120)
+//					{
+//						Toast.makeText(getApplicationContext(), R.string.error_input_time,
+//								Toast.LENGTH_SHORT).show();
+//					}
 					dialogForecast.dismiss();
 				}
 			});
@@ -503,12 +510,12 @@ public class MainActivity extends MapActivity {
 
 			break;
 		case R.id.turnPower:
-			Toast.makeText(getApplicationContext(), "Turn is Selected",
-					Toast.LENGTH_SHORT).show();
-			final Dialog trackingDialog = new Dialog(MainActivity.this,R.style.DialogTitleStyle);
+//			Toast.makeText(getApplicationContext(), "Turn is Selected",
+//					Toast.LENGTH_SHORT).show();
+			final Dialog trackingDialog = new Dialog(MainActivity.this,
+					R.style.DialogTitleStyle);
 			trackingDialog.setContentView(R.layout.dialog_tracking_controls);
-			trackingDialog
-					.setTitle(R.string.tracking_controls);
+			trackingDialog.setTitle(R.string.tracking_controls);
 			Button startButton = (Button) trackingDialog
 					.findViewById(R.id.button_start);
 			startButton.setOnClickListener(new OnClickListener() {
@@ -541,10 +548,11 @@ public class MainActivity extends MapActivity {
 			break;
 
 		case R.id.showCurrent:
-			Toast.makeText(getApplicationContext(), "Show Current is Selected",
-					Toast.LENGTH_SHORT).show();
+//			Toast.makeText(getApplicationContext(), "Show Current is Selected",
+//					Toast.LENGTH_SHORT).show();
 			isShowCurrent = true;
-			final Dialog overlayDialog = new Dialog(MainActivity.this,R.style.DialogTitleStyle);
+			final Dialog overlayDialog = new Dialog(MainActivity.this,
+					R.style.DialogTitleStyle);
 			overlayDialog.setContentView(R.layout.dialog_overlay);
 			overlayDialog.setTitle(R.string.show_current_dialog_title);
 			Button okButton = (Button) overlayDialog.findViewById(R.id.btnOk);
@@ -568,8 +576,8 @@ public class MainActivity extends MapActivity {
 			break;
 		case R.id.trackList:
 			isShowCurrent = false;
-			Toast.makeText(getApplicationContext(), "Track", Toast.LENGTH_SHORT)
-					.show();
+//			Toast.makeText(getApplicationContext(), "Track", Toast.LENGTH_SHORT)
+//					.show();
 			trackList();
 			break;
 
@@ -599,31 +607,28 @@ public class MainActivity extends MapActivity {
 		extras.putString("PATH", VAL_EXTERNAL_STORAGE);
 		it.putExtras(extras);
 		startActivityForResult(it, 0);
-		//startActivity(it);
+		// startActivity(it);
 	}
-	
-	protected void onResume()
-	{
+
+	protected void onResume() {
 		super.onResume();
 		String mode = null;
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(Environment.getExternalStorageDirectory().getAbsolutePath() + PATH_TO_TMP_FILE));
-			
+			BufferedReader in = new BufferedReader(new FileReader(Environment
+					.getExternalStorageDirectory().getAbsolutePath()
+					+ PATH_TO_TMP_FILE));
+
 			mode = in.readLine();
-			if(mode != null)
-			{
-				if(mode.equals("1"))
-				{
+			if (mode != null) {
+				if (mode.equals("1")) {
 					GPXfile = in.readLine();
-				}
-				else if(mode.equals("2"))
-				{
+				} else if (mode.equals("2")) {
 					Point1 = in.readLine();
 					in.readLine();
 					Point2 = in.readLine();
 				}
 			}
-			
+
 			in.close();
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -632,19 +637,19 @@ public class MainActivity extends MapActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		if(mode != null && mode.equals("1"))
-		{
-			if(GPXfile != null)
-			{
-				//showGPX(GPXfile);
-				Intent it = new Intent(getApplicationContext(), ShowGPXActivity.class);
+
+		if (mode != null && mode.equals("1")) {
+			if (GPXfile != null) {
+				// showGPX(GPXfile);
+				Intent it = new Intent(getApplicationContext(),
+						ShowGPXActivity.class);
 				Bundle extras = new Bundle();
 				extras.putString("FILE", GPXfile);
 				it.putExtras(extras);
 				startActivity(it);
 			}
-			File f = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + PATH_TO_TMP_FILE);
+			File f = new File(Environment.getExternalStorageDirectory()
+					.getAbsolutePath() + PATH_TO_TMP_FILE);
 			f.delete();
 			try {
 				f.createNewFile();
@@ -652,50 +657,71 @@ public class MainActivity extends MapActivity {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		else if(mode != null && mode.equals("2"))
-		{
-			if(Point1 != null)
-			{
+		} else if (mode != null && mode.equals("2")) {
+			if (Point1 != null) {
 				Log.d("Point1", Point1);
 				EditText et1 = (EditText) dialog.findViewById(R.id.et_start);
 				et1.setText(Point1);
-				
+
 			}
-			
-			if(Point2 != null)
-			{
+
+			if (Point2 != null) {
 				Log.d("Point2", Point2);
 				EditText et1 = (EditText) dialog.findViewById(R.id.et_end);
 				et1.setText(Point2);
 			}
 		}
 	}
+
 	@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-          
-        MapController mc = m_MapView.getController();
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_I:
-                mc.zoomIn();
-                break;
-        case KeyEvent.KEYCODE_O:
-                mc.zoomOut();
-                break;
-        case KeyEvent.KEYCODE_DPAD_LEFT:
-            mc.scrollBy(-50, 0);
-            break;
-        case KeyEvent.KEYCODE_DPAD_RIGHT:
-            mc.scrollBy(50, 0);
-            break;
-        case KeyEvent.KEYCODE_DPAD_DOWN:
-            mc.scrollBy(0, 50);
-            break;
-        case KeyEvent.KEYCODE_DPAD_UP:
-            mc.scrollBy(0, -50);            
-            break;
-        }            
-        return super.onKeyDown(keyCode, event);
-    }
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+
+		MapController mc = m_MapView.getController();
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_I:
+			mc.zoomIn();
+			break;
+		case KeyEvent.KEYCODE_O:
+			mc.zoomOut();
+			break;
+		case KeyEvent.KEYCODE_DPAD_LEFT:
+			mc.scrollBy(-50, 0);
+			break;
+		case KeyEvent.KEYCODE_DPAD_RIGHT:
+			mc.scrollBy(50, 0);
+			break;
+		case KeyEvent.KEYCODE_DPAD_DOWN:
+			mc.scrollBy(0, 50);
+			break;
+		case KeyEvent.KEYCODE_DPAD_UP:
+			mc.scrollBy(0, -50);
+			break;
+		case KeyEvent.KEYCODE_BACK:
+			final Dialog overlayDialog = new AlertDialog.Builder(
+					MainActivity.this)
+					.setIcon(R.drawable.alert_dialog_icon)
+					.setTitle(R.string.alert_dialog_two_buttons_title)
+					.setPositiveButton(R.string.alert_dialog_ok,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+
+									/* User clicked OK so do some stuff */
+									finish();
+								}
+							})
+					.setNegativeButton(R.string.alert_dialog_cancel,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+
+									/* User clicked Cancel so do some stuff */
+								}
+							}).create();
+			overlayDialog.show();
+			break;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }
