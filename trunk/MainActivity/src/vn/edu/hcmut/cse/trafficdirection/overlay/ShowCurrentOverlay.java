@@ -51,7 +51,7 @@ public class ShowCurrentOverlay extends Overlay {
 	
 		if (m_iOverlayType == MainActivity.OVERLAY_V) {
 
-			int step = 21 - mapView.getZoomLevel();
+			int step = 1;//21 - mapView.getZoomLevel();
 
 			for (int i = 0; i < streetList.size(); i++)
 			{
@@ -86,6 +86,7 @@ public class ShowCurrentOverlay extends Overlay {
 						mPaint.setStrokeJoin(Paint.Join.ROUND);
 						mPaint.setStrokeCap(Paint.Cap.ROUND);
 						int stroke = 6;
+						stroke = (int)(stroke * Math.pow(1.5, mapView.getZoomLevel() - 17));
 						mPaint.setStrokeWidth(stroke);
 
 						GeoPoint gp1 = new GeoPoint((int) (pre.getLat() * 1E6),

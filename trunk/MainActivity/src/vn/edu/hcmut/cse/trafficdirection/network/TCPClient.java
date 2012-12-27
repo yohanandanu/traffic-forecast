@@ -27,8 +27,10 @@ public class TCPClient extends Thread {
 
 	public void run() {
 		try {
-			InetAddress serverAddr = InetAddress
-					.getByName("www.vre.cse.hcmut.edu.vn");
+			//InetAddress serverAddr = InetAddress.getByName("www.vre.cse.hcmut.edu.vn");
+			
+			//InetAddress serverAddr = InetAddress.getByName("10.0.2.2");
+			InetAddress serverAddr = InetAddress.getByName("192.168.2.1");
 
 			Socket socket = new Socket(serverAddr, 6655);
 
