@@ -1,6 +1,5 @@
 package vn.edu.hcmut.cse.trafficdirection.main;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -27,15 +26,15 @@ import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
-public class ShowCurrentActivity extends MapActivity{
+public class ShowCurrentActivity extends MapActivity {
 	public static final double[] height = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-		11, 12, 13, 0.169600, 0.084800, 0.042400, 0.021200, 0.010600,
-		0.005300, 0.002650, 21 };
-public static final double[] width = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
-		11, 12, 13, 0.12192, 0.06096, 0.03048, 0.015240, 0.007620, 0.00381,
-		0.001905, 21 };
-public static final double[] step = { 0, 21, 20, 19, 18, 17, 16, 15, 14,
-		13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+			11, 12, 13, 0.169600, 0.084800, 0.042400, 0.021200, 0.010600,
+			0.005300, 0.002650, 21 };
+	public static final double[] width = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+			11, 12, 13, 0.12192, 0.06096, 0.03048, 0.015240, 0.007620, 0.00381,
+			0.001905, 21 };
+	public static final double[] step = { 0, 21, 20, 19, 18, 17, 16, 15, 14,
+			13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
 
 	private MapView m_MapView = null;
 	private int m_iOverlayType = -1;
@@ -44,23 +43,23 @@ public static final double[] step = { 0, 21, 20, 19, 18, 17, 16, 15, 14,
 	public ArrayList<DrawableStreet> streetList2 = new ArrayList<DrawableStreet>();
 	public int count = 0;
 	public GeoPoint m_CurrentLocation = null;
-	
+
 	private DatabaseHelper md;
 	private TCPClient tcpClient = null;
-	
+
 	@SuppressWarnings("deprecation")
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_show_gpx);
-		
+
 		streetList.clear();
 		streetList2.clear();
-		
+
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			m_iOverlayType = Integer.parseInt(extras.getString("OVERLAY"));
 		}
-		
+
 		m_MapView = (MapView) findViewById(R.id.mapViewShowGPX);
 
 		LinearLayout zoomLayout = (LinearLayout) findViewById(R.id.layout_MainMenuShowGPX);
@@ -79,12 +78,12 @@ public static final double[] step = { 0, 21, 20, 19, 18, 17, 16, 15, 14,
 				return false;
 			}
 		});
-		
+
 		md = new DatabaseHelper(this);
-		
+
 		tcpClient = new TCPClient(md);
 		tcpClient.start();
-		
+
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
@@ -94,10 +93,10 @@ public static final double[] step = { 0, 21, 20, 19, 18, 17, 16, 15, 14,
 			}
 
 		}, 0, 5000);
-		
+
 		showCurrent(m_iOverlayType);
 	}
-	
+
 	private void showCurrent(int OverlayType) {
 		updateStreet();
 		ShowCurrentOverlay scOverlay = new ShowCurrentOverlay(m_MapView,
@@ -198,14 +197,12 @@ public static final double[] step = { 0, 21, 20, 19, 18, 17, 16, 15, 14,
 
 		Log.d("Time add to Street", "" + (System.currentTimeMillis() - start));
 	}
-	
+
 	protected void onStop() {
 		super.onStop();
 		Log.d("OnStop", "STOP");
 		timer.cancel();
 	}
-
-	
 
 	private void updatePosition() {
 		// TODO Auto-generated method stub
@@ -218,35 +215,35 @@ public static final double[] step = { 0, 21, 20, 19, 18, 17, 16, 15, 14,
 	@Override
 	protected boolean isRouteDisplayed() {
 		// TODO Auto-generated method stub
-		return false;	
+		return false;
 	}
-	@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-          
-        MapController mc = m_MapView.getController();
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_I:
-                mc.zoomIn();
-                break;
-        case KeyEvent.KEYCODE_O:
-                mc.zoomOut();
-                break;
-        case KeyEvent.KEYCODE_DPAD_LEFT:
-            mc.scrollBy(-50, 0);
-            break;
-        case KeyEvent.KEYCODE_DPAD_RIGHT:
-            mc.scrollBy(50, 0);
-            break;
-        case KeyEvent.KEYCODE_DPAD_DOWN:
-            mc.scrollBy(0, 50);
-            break;
-        case KeyEvent.KEYCODE_DPAD_UP:
-            mc.scrollBy(0, -50);            
-            break;
-        }            
-        return super.onKeyDown(keyCode, event);
-    }
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+
+		MapController mc = m_MapView.getController();
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_I:
+			mc.zoomIn();
+			break;
+		case KeyEvent.KEYCODE_O:
+			mc.zoomOut();
+			break;
+		case KeyEvent.KEYCODE_DPAD_LEFT:
+			mc.scrollBy(-50, 0);
+			break;
+		case KeyEvent.KEYCODE_DPAD_RIGHT:
+			mc.scrollBy(50, 0);
+			break;
+		case KeyEvent.KEYCODE_DPAD_DOWN:
+			mc.scrollBy(0, 50);
+			break;
+		case KeyEvent.KEYCODE_DPAD_UP:
+			mc.scrollBy(0, -50);
+			break;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 
 }

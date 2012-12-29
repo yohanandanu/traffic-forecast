@@ -42,7 +42,7 @@ import android.widget.LinearLayout.LayoutParams;
 
 public class MainActivity extends MapActivity {
 	public static final String PATH_TO_TMP_FILE = "/tmpFile";
-
+	public static final String PATH_TO_TMP_FOLDER = "/TrafficDirection";
 	// Nhom GPS
 	protected static LocationManager locationManager;
 	public final static String KEY_GPS_DISTANCE_LOGGING_INTERVAL = "gps.distance.logging.interval";
@@ -77,9 +77,6 @@ public class MainActivity extends MapActivity {
 	File nodeSQLFile = null;
 	File streetSQLFile = null;
 
-	
-
-
 	public int zoomLevel;
 
 	// private Random r;
@@ -99,7 +96,6 @@ public class MainActivity extends MapActivity {
 		// md.getWritableDatabase().execSQL("DROP TABLE " +
 		// DatabaseHelper.STREET_TABLE_NAME);
 		// md.onCreate(md.getWritableDatabase());
-
 
 		File tmp = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + PATH_TO_TMP_FILE);
@@ -251,7 +247,7 @@ public class MainActivity extends MapActivity {
 		case R.id.buildRoute:
 			File tmp = new File(Environment.getExternalStorageDirectory()
 					.getAbsolutePath() + PATH_TO_TMP_FILE);
-			
+
 			tmp.delete();
 			try {
 				tmp.createNewFile();
@@ -260,8 +256,9 @@ public class MainActivity extends MapActivity {
 				e1.printStackTrace();
 			}
 
-//			Toast.makeText(getApplicationContext(), "Build Route is Selected",
-//					Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(),
+			// "Build Route is Selected",
+			// Toast.LENGTH_SHORT).show();
 			dialog.setContentView(R.layout.dialog_directions_input);
 			dialog.setTitle(R.string.dialog_input_direct_title);
 
@@ -289,7 +286,8 @@ public class MainActivity extends MapActivity {
 			dialogButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					if (Point1 == null) {
-						Toast.makeText(getApplicationContext(),R.string.please_input_startpoint,
+						Toast.makeText(getApplicationContext(),
+								R.string.please_input_startpoint,
 								Toast.LENGTH_SHORT).show();
 					} else if (Point2 == null) {
 						Toast.makeText(getApplicationContext(),
@@ -325,16 +323,17 @@ public class MainActivity extends MapActivity {
 			dialog.show();
 			break;
 		case R.id.forecast:
-//			Toast.makeText(getApplicationContext(), "Forecast is Selected",
-//					Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(), "Forecast is Selected",
+			// Toast.LENGTH_SHORT).show();
 			final Dialog dialogForecast = new Dialog(MainActivity.this,
 					R.style.DialogTitleStyle);
 			dialogForecast.setContentView(R.layout.dialog_forecast);
 			dialogForecast.setTitle(R.string.dialog_forecast_title);
 			Button dlButton = (Button) dialogForecast
 					.findViewById(R.id.bt_forecast_ok);
-			
-			 final EditText et = (EditText) dialogForecast.findViewById(R.id.forecast_input_time);
+
+			final EditText et = (EditText) dialogForecast
+					.findViewById(R.id.forecast_input_time);
 
 			dlButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
@@ -352,8 +351,8 @@ public class MainActivity extends MapActivity {
 
 			break;
 		case R.id.turnPower:
-//			Toast.makeText(getApplicationContext(), "Turn is Selected",
-//					Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(), "Turn is Selected",
+			// Toast.LENGTH_SHORT).show();
 			final Dialog trackingDialog = new Dialog(MainActivity.this,
 					R.style.DialogTitleStyle);
 			trackingDialog.setContentView(R.layout.dialog_tracking_controls);
@@ -390,8 +389,9 @@ public class MainActivity extends MapActivity {
 			break;
 
 		case R.id.showCurrent:
-//			Toast.makeText(getApplicationContext(), "Show Current is Selected",
-//					Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(),
+			// "Show Current is Selected",
+			// Toast.LENGTH_SHORT).show();
 			final Dialog overlayDialog = new Dialog(MainActivity.this,
 					R.style.DialogTitleStyle);
 			overlayDialog.setContentView(R.layout.dialog_overlay);
@@ -408,14 +408,14 @@ public class MainActivity extends MapActivity {
 					else
 						m_iOverlayType = OVERLAY_D;
 
-					//showCurrent(m_iOverlayType);
+					// showCurrent(m_iOverlayType);
 					Intent it = new Intent(getApplicationContext(),
 							ShowCurrentActivity.class);
 					Bundle extras = new Bundle();
 					extras.putString("OVERLAY", m_iOverlayType + "");
 					it.putExtras(extras);
 					startActivity(it);
-					
+
 					overlayDialog.hide();
 				}
 			});
@@ -423,8 +423,9 @@ public class MainActivity extends MapActivity {
 			overlayDialog.show();
 			break;
 		case R.id.trackList:
-//			Toast.makeText(getApplicationContext(), "Track", Toast.LENGTH_SHORT)
-//					.show();
+			// Toast.makeText(getApplicationContext(), "Track",
+			// Toast.LENGTH_SHORT)
+			// .show();
 			trackList();
 			break;
 

@@ -52,15 +52,17 @@ public class AndroidListFilesActivity extends ListActivity {
 		File[] files = f.listFiles();
 		fileList.clear();
 		fileShowList.clear();
-		if(files != null)
-		{
+		if (files != null) {
 			for (File file : files) {
 				if (file.getName().endsWith("gpx")) {
 					fileList.add(file.getPath());
 					String fileName = file.getName();
-					String temp = fileName.substring(13, 15)+" : "+fileName.substring(15, 17)+"  "+
-					fileName.subSequence(11,13)+"/"+fileName.subSequence(9,11)+"/"+fileName.subSequence(5,9);
-					//fileShowList.add(file.getName());
+					String temp = fileName.substring(13, 15) + " : "
+							+ fileName.substring(15, 17) + "  "
+							+ fileName.subSequence(11, 13) + "/"
+							+ fileName.subSequence(9, 11) + "/"
+							+ fileName.subSequence(5, 9);
+					// fileShowList.add(file.getName());
 					fileShowList.add(temp);
 				}
 			}
@@ -79,13 +81,15 @@ public class AndroidListFilesActivity extends ListActivity {
 		for (int i = 0; i < chosen.size(); i++) {
 			if (chosen.valueAt(i)) {
 				Intent it = new Intent();
-				//File f = new File(fileList.get(chosen.keyAt(i)));
-				
-				//f.delete();
+				// File f = new File(fileList.get(chosen.keyAt(i)));
+
+				// f.delete();
 				try {
-					FileWriter fstream = new FileWriter(Environment.getExternalStorageDirectory().getAbsolutePath() + MainActivity.PATH_TO_TMP_FILE);
+					FileWriter fstream = new FileWriter(Environment
+							.getExternalStorageDirectory().getAbsolutePath()
+							+ MainActivity.PATH_TO_TMP_FILE);
 					BufferedWriter out = new BufferedWriter(fstream);
-					
+
 					out.write("1");
 					out.newLine();
 					out.write(fileList.get(chosen.keyAt(i)));
@@ -94,11 +98,10 @@ public class AndroidListFilesActivity extends ListActivity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
 
-				//startActivity(it);
+				// startActivity(it);
 				setResult(RESULT_OK, it);
-                finish();
+				finish();
 				break;
 			}
 		}

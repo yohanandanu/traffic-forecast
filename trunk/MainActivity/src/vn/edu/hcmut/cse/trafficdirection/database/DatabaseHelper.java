@@ -23,14 +23,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 		db.execSQL("CREATE TABLE "
 				+ NODE_TABLE_NAME
 				+ " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NodeID INTEGER, Lat REAL, Lon REAL, StreetID Integer, Speed TEXT, Density TEXT, TimeStamp TEXT)");
-/*		
-		db.execSQL("CREATE TABLE "
-				+ NODE_TABLE_NAME
-				+ " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NodeID INTEGER, Lat REAL, Lon REAL, StreetID Integer, Speed TEXT, Density TEXT, TimeStamp TEXT" +
-				"FOREIGN KEY(StreetID) REFERENCES STREET_TABLE_NAME(StreetID))");
-		
-*/		
-		
+		/*
+		 * db.execSQL("CREATE TABLE " + NODE_TABLE_NAME +
+		 * " (ID INTEGER PRIMARY KEY AUTOINCREMENT, NodeID INTEGER, Lat REAL, Lon REAL, StreetID Integer, Speed TEXT, Density TEXT, TimeStamp TEXT"
+		 * + "FOREIGN KEY(StreetID) REFERENCES STREET_TABLE_NAME(StreetID))");
+		 */
+
 		db.execSQL("CREATE TABLE " + STREET_TABLE_NAME
 				+ " (StreetID INTEGER PRIMARY KEY, Label TEXT, Type TEXT)");
 
