@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import vn.edu.hcmut.cse.trafficdirection.database.DatabaseHelper;
 import vn.edu.hcmut.cse.trafficdirection.main.MainActivity;
+import vn.edu.hcmut.cse.trafficdirection.main.ShowCurrentActivity;
 import vn.edu.hcmut.cse.trafficdirection.node.DrawableStreet;
 import vn.edu.hcmut.cse.trafficdirection.node.NodeDrawable;
 import android.graphics.Canvas;
@@ -24,10 +25,10 @@ public class ShowCurrentOverlay extends Overlay {
 	MapView mapView;
 	DatabaseHelper md;
 	private Projection project;
-	MainActivity main;
+	ShowCurrentActivity main;
 
 	public ShowCurrentOverlay(MapView mapView, int m_iOverlayType,
-			DatabaseHelper md, MainActivity mainActivity) {
+			DatabaseHelper md, ShowCurrentActivity mainActivity) {
 		this.m_iOverlayType = m_iOverlayType;
 		this.mapView = mapView;
 		this.md = md;

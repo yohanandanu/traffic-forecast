@@ -12,6 +12,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import vn.edu.hcmut.cse.trafficdirection.database.DatabaseHelper;
 
@@ -20,9 +21,11 @@ public class TCPClient extends Thread {
 	public DatagramSocket socket = null;
 	private DatabaseHelper md;
 	public PrintWriter out;
+	public ArrayList<String> stack = new ArrayList<String>(); 
 
 	public TCPClient(DatabaseHelper md) {
 		this.md = md;
+		stack.clear();
 	}
 
 	public void run() {
@@ -59,5 +62,10 @@ public class TCPClient extends Thread {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	class SentData extends Thread
+	{
+		
 	}
 }
