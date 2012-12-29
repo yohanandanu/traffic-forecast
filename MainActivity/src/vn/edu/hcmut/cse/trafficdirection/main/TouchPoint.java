@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -36,6 +35,7 @@ public class TouchPoint extends MapActivity {
 	private int x;
 	private int y;
 	private String Point1 = null;
+
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -47,23 +47,24 @@ public class TouchPoint extends MapActivity {
 		List<Overlay> listOfOverlays = mapview.getOverlays();
 		listOfOverlays.clear();
 		listOfOverlays.add(mapOverlay);
-		
+
 		tap_Button = (Button) findViewById(R.id.imageButtonSelector);
 		tap_Button.setText("Tap To Chose");
 		tap_Button.setVisibility(View.GONE);
 		tap_Button.setOnClickListener(new OnClickListener() {
-			
+
 			public void onClick(View arg0) {
 				// TODO Auto-generated method stub
-				GeoPoint p = mapview.getProjection().fromPixels(
-						x, y);
-				
+				GeoPoint p = mapview.getProjection().fromPixels(x, y);
+
 				Intent it = new Intent();
-				
+
 				try {
-					FileWriter fstream = new FileWriter(Environment.getExternalStorageDirectory().getAbsolutePath() + MainActivity.PATH_TO_TMP_FILE, true);
+					FileWriter fstream = new FileWriter(Environment
+							.getExternalStorageDirectory().getAbsolutePath()
+							+ MainActivity.PATH_TO_TMP_FILE, true);
 					BufferedWriter out = new BufferedWriter(fstream);
-					
+
 					out.write("2");
 					out.newLine();
 					out.write(p.toString());
@@ -73,13 +74,13 @@ public class TouchPoint extends MapActivity {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
+
 				setResult(RESULT_OK, it);
-                finish();
-				
+				finish();
+
 			}
 		});
-		
+
 		String mode = null;
 		try {
 			BufferedReader in = new BufferedReader(new FileReader(Environment
@@ -103,8 +104,7 @@ public class TouchPoint extends MapActivity {
 			e.printStackTrace();
 		}
 
-		if(Point1 != null)
-		{
+		if (Point1 != null) {
 		}
 		mapview.invalidate();
 
@@ -118,40 +118,43 @@ public class TouchPoint extends MapActivity {
 			if (event.getAction() == 1) {
 				x = (int) event.getX();
 				y = (int) event.getY();
-				
-				//tap_Button.setPadding(x, y, tap_Button.getPaddingRight(), tap_Button.getPaddingBottom());
-				//tap_Button.setM;
+
+				// tap_Button.setPadding(x, y, tap_Button.getPaddingRight(),
+				// tap_Button.getPaddingBottom());
+				// tap_Button.setM;
 				tap_Button.setVisibility(View.VISIBLE);
 				RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
-	                    LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
-				rel_btn.leftMargin = x-50;
-				rel_btn.topMargin = y-50;
-				rel_btn.width = 100;//tap_Button.getWidth();
+				rel_btn.leftMargin = x - 50;
+				rel_btn.topMargin = y - 50;
+				rel_btn.width = 100;// tap_Button.getWidth();
 				rel_btn.height = 50;// tap_Button.getHeight();
-			
+
 				tap_Button.setLayoutParams(rel_btn);
 			}
 			return false;
 		}
-		
+
 		public boolean draw(Canvas canvas, MapView mapView, boolean shadow,
 				long when) {
-			if(Point1 == null)
+			if (Point1 == null)
 				return super.draw(canvas, mapView, shadow, when);
-			
+
 			final float scale = getResources().getDisplayMetrics().density;
-			//Log.v("dessssssssssssssssssssss", Float.toString(scale));
+			// Log.v("dessssssssssssssssssssss", Float.toString(scale));
 			int dip = (int) (8 * scale);
-			
+
 			Bitmap bmp1 = BitmapFactory.decodeResource(getResources(),
 					R.drawable.startpoint);
 
 			Point screenPts1 = new Point();
-			GeoPoint p1 = new GeoPoint(Integer.parseInt(Point1.split(",")[0]), Integer.parseInt(Point1.split(",")[1]));
+			GeoPoint p1 = new GeoPoint(Integer.parseInt(Point1.split(",")[0]),
+					Integer.parseInt(Point1.split(",")[1]));
 			mapView.getProjection().toPixels(p1, screenPts1);
-			canvas.drawBitmap(bmp1, screenPts1.x - dip, screenPts1.y - dip, null);
-			
+			canvas.drawBitmap(bmp1, screenPts1.x - dip, screenPts1.y - dip,
+					null);
+
 			return super.draw(canvas, mapView, shadow, when);
 		}
 	}
@@ -160,31 +163,32 @@ public class TouchPoint extends MapActivity {
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
+
 	@Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        // TODO Auto-generated method stub
-          
-        MapController mc = mapview.getController();
-        switch (keyCode) {
-        case KeyEvent.KEYCODE_I:
-                mc.zoomIn();
-                break;
-        case KeyEvent.KEYCODE_O:
-                mc.zoomOut();
-                break;
-        case KeyEvent.KEYCODE_DPAD_LEFT:
-            mc.scrollBy(-50, 0);
-            break;
-        case KeyEvent.KEYCODE_DPAD_RIGHT:
-            mc.scrollBy(50, 0);
-            break;
-        case KeyEvent.KEYCODE_DPAD_DOWN:
-            mc.scrollBy(0, 50);
-            break;
-        case KeyEvent.KEYCODE_DPAD_UP:
-            mc.scrollBy(0, -50);            
-            break;
-        }            
-        return super.onKeyDown(keyCode, event);
-    }
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+
+		MapController mc = mapview.getController();
+		switch (keyCode) {
+		case KeyEvent.KEYCODE_I:
+			mc.zoomIn();
+			break;
+		case KeyEvent.KEYCODE_O:
+			mc.zoomOut();
+			break;
+		case KeyEvent.KEYCODE_DPAD_LEFT:
+			mc.scrollBy(-50, 0);
+			break;
+		case KeyEvent.KEYCODE_DPAD_RIGHT:
+			mc.scrollBy(50, 0);
+			break;
+		case KeyEvent.KEYCODE_DPAD_DOWN:
+			mc.scrollBy(0, 50);
+			break;
+		case KeyEvent.KEYCODE_DPAD_UP:
+			mc.scrollBy(0, -50);
+			break;
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

@@ -16,7 +16,7 @@ public class NodeGPS {
 		this.lon = Double.parseDouble(lon);
 		speed = 0.0;
 	}
-	
+
 	public NodeGPS(double lat, double lon) {
 		// TODO Auto-generated constructor stub
 		this.lat = lat;
