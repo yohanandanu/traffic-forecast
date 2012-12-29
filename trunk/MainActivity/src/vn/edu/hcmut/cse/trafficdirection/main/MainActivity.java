@@ -7,21 +7,27 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import vn.edu.hcmut.cse.trafficdirection.database.DatabaseHelper;
 
 import vn.edu.hcmut.cse.trafficdirection.main.R;
+import vn.edu.hcmut.cse.trafficdirection.overlay.MyPositionOverlay;
+
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
 import com.google.android.maps.MapView;
+import com.google.android.maps.Overlay;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Environment;
@@ -65,8 +71,10 @@ public class MainActivity extends MapActivity {
 
 	// Nhom hien thi
 	private MapView m_MapView = null;
+	private MapController mapController;
 	public GeoPoint m_CurrentLocation = null;
 	private int m_iOverlayType = OVERLAY_V;
+	private MyPositionOverlay positionOverlay;
 
 	private String GPXfile = null;
 	private String Point1 = null;
@@ -87,70 +95,16 @@ public class MainActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		Log.d("Start", "Start");
 		setContentView(R.layout.activity_main);
-
-		// Read map data and write to Database
-		new DatabaseHelper(this);
-
-		// md.getWritableDatabase().execSQL("DROP TABLE " +
-		// DatabaseHelper.NODE_TABLE_NAME);
-		// md.getWritableDatabase().execSQL("DROP TABLE " +
-		// DatabaseHelper.STREET_TABLE_NAME);
-		// md.onCreate(md.getWritableDatabase());
-
-		File tmp = new File(Environment.getExternalStorageDirectory()
-				.getAbsolutePath() + PATH_TO_TMP_FILE);
-
-		if (!tmp.exists()) {
-			File oldDb = new File(
-					"/data/data/vn.edu.hcmut.cse.trafficdirection.main/databases/MapDatabase");
-			oldDb.delete();
-
-			try {
-				InputStream fis = getApplicationContext().getAssets().open(
-						"MapDatabase");
-				FileOutputStream fos = new FileOutputStream(oldDb);
-
-				byte[] buffer = new byte[1024];
-				int length;
-
-				while ((length = fis.read(buffer)) > 0) {
-					fos.write(buffer, 0, length);
-				}
-
-				fis.close();
-				fos.close();
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IOException e) {
-			}
-
-			try {
-				tmp.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-
-		} else {
-			tmp.delete();
-			try {
-				tmp.createNewFile();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
+		checkDatabaseExist();
 		dialog = new Dialog(MainActivity.this, R.style.DialogTitleStyle);
-
 		m_MapView = (MapView) findViewById(R.id.mapView);
 		LinearLayout zoomLayout = (LinearLayout) findViewById(R.id.layout_MainMenu);
 		zoomLayout.addView(m_MapView.getZoomControls(),
 				new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
 						LayoutParams.WRAP_CONTENT));
 		m_MapView.displayZoomControls(true);
-		m_MapView.getController().setZoom(17);
+		mapController = m_MapView.getController();
+		mapController.setZoom(17);
 
 		locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 		Location location = locationManager
@@ -159,21 +113,49 @@ public class MainActivity extends MapActivity {
 				.isProviderEnabled(LocationManager.GPS_PROVIDER);
 
 		// Se thay bang vi tri hien tai lay tu GPS
-		double currentLat = 10.770579;
-		double currentLon = 106.657963;
 
-		if (location != null) {
-			currentLat = location.getLatitude();
-			currentLon = location.getLongitude();
-		}
+		positionOverlay = new MyPositionOverlay();
+		positionOverlay.GPXOverlay(this);
+		List<Overlay> overlays = m_MapView.getOverlays();
+		overlays.add(positionOverlay);
 
-		m_CurrentLocation = new GeoPoint((int) (currentLat * 1E6),
-				(int) (currentLon * 1E6));
-		m_MapView.getController().animateTo(m_CurrentLocation);
+		LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_FINE);
+		criteria.setAltitudeRequired(false);
+		criteria.setBearingRequired(false);
+		criteria.setCostAllowed(true);
+		criteria.setPowerRequirement(Criteria.POWER_LOW);
+		String provider = locationManager.getBestProvider(criteria, true);
+		Location location1 = null;
+		if (provider != null) {
+			location1 = locationManager.getLastKnownLocation(provider);
+			updateWithNewLocation(location1);
+			locationManager.requestLocationUpdates(provider, 2000, 10,
+					locationListener);
+		} else
+			updateWithNewLocation(location);
 		if (!isGPSEnabled)
 			showSettingsAlert();
 	}
+
+	private final LocationListener locationListener = new LocationListener() {
+		public void onLocationChanged(Location location) {
+			updateWithNewLocation(location);
+		}
+
+		public void onProviderDisabled(String provider) {
+
+			updateWithNewLocation(null);
+		}
+
+		public void onProviderEnabled(String provider) {
+		}
+
+		public void onStatusChanged(String provider, int status, Bundle extras) {
+		}
+	};
 
 	/*
 	 * private void showGPX(String file) { // TODO Auto-generated method stub
@@ -558,5 +540,79 @@ public class MainActivity extends MapActivity {
 			break;
 		}
 		return super.onKeyDown(keyCode, event);
+	}
+
+	private void updateWithNewLocation(Location location) {
+		if (location != null) {
+			// Update my location marker
+			positionOverlay.setLocation(location);
+			// Update the map location.
+			Double geoLat = location.getLatitude() * 1E6;
+			Double geoLng = location.getLongitude() * 1E6;
+			GeoPoint point = new GeoPoint(geoLat.intValue(), geoLng.intValue());
+			mapController.animateTo(point);
+		} else {
+			positionOverlay.setLocation(location);
+			Double geoLat = 10.770579 * 1E6;
+			Double geoLng = 106.657963 * 1E6;
+			GeoPoint point = new GeoPoint(geoLat.intValue(), geoLng.intValue());
+			mapController.animateTo(point);
+		}
+	}
+	private void checkDatabaseExist(){
+
+		// Read map data and write to Database
+		new DatabaseHelper(this);
+
+		// md.getWritableDatabase().execSQL("DROP TABLE " +
+		// DatabaseHelper.NODE_TABLE_NAME);
+		// md.getWritableDatabase().execSQL("DROP TABLE " +
+		// DatabaseHelper.STREET_TABLE_NAME);
+		// md.onCreate(md.getWritableDatabase());
+
+		File tmp = new File(Environment.getExternalStorageDirectory()
+				.getAbsolutePath() + PATH_TO_TMP_FILE);
+
+		if (!tmp.exists()) {
+			File oldDb = new File(
+					"/data/data/vn.edu.hcmut.cse.trafficdirection.main/databases/MapDatabase");
+			oldDb.delete();
+
+			try {
+				InputStream fis = getApplicationContext().getAssets().open(
+						"MapDatabase");
+				FileOutputStream fos = new FileOutputStream(oldDb);
+
+				byte[] buffer = new byte[1024];
+				int length;
+
+				while ((length = fis.read(buffer)) > 0) {
+					fos.write(buffer, 0, length);
+				}
+
+				fis.close();
+				fos.close();
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+			}
+
+			try {
+				tmp.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		} else {
+			tmp.delete();
+			try {
+				tmp.createNewFile();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 }

@@ -35,6 +35,7 @@ public class TouchPoint extends MapActivity {
 	private int x;
 	private int y;
 	private String Point1 = null;
+	private float scale;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class TouchPoint extends MapActivity {
 		List<Overlay> listOfOverlays = mapview.getOverlays();
 		listOfOverlays.clear();
 		listOfOverlays.add(mapOverlay);
-
+		this.scale =  getResources().getDisplayMetrics().density;
 		tap_Button = (Button) findViewById(R.id.imageButtonSelector);
 		tap_Button.setText("Tap To Chose");
 		tap_Button.setVisibility(View.GONE);
@@ -128,8 +129,8 @@ public class TouchPoint extends MapActivity {
 
 				rel_btn.leftMargin = x - 50;
 				rel_btn.topMargin = y - 50;
-				rel_btn.width = 100;// tap_Button.getWidth();
-				rel_btn.height = 50;// tap_Button.getHeight();
+				rel_btn.width = dip(100);// tap_Button.getWidth();
+				rel_btn.height = dip(50);// tap_Button.getHeight();
 
 				tap_Button.setLayoutParams(rel_btn);
 			}
@@ -163,7 +164,10 @@ public class TouchPoint extends MapActivity {
 	protected boolean isRouteDisplayed() {
 		return false;
 	}
-
+	public int dip(int px){
+		int dip = (int) (px * scale);
+		return dip;
+	}
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
