@@ -2,7 +2,7 @@
 <resources>
     <string name="hello">Xin Chào, Đây là phần mềm định vị!</string>
     <string name="app_name">Dự Báo Và Hướng Dẫn Giao Thông</string>
-    <string name="show_current_menu">Hiển Thị</string>
+    <string name="show_current_menu">Thông Tin Giao Thông</string>
     <string name="build_route_menu">Tìm Đường</string>
     <string name="forecast_menu">Dự Báo</string>
     <string name="turn_power_menu">Theo Vết</string>
@@ -23,5 +23,22 @@
 	<string name="input_direct_pointonmap">Chạm vào bản đồ</string>
 	<string name="gps_not_enable_yet">GPS hiện tại chưa được bật.Bạn có muốn bật nó lên không?</string>
 	<string name="tracking_controls">Điều khiển chức năng theo dõi</string>
-
+	<string name="text_minutes">Phút</string>
+	<string name="dialog_forecast_ok">Đồng ý</string>
+	<string name="dialog_forecast_title">Nhập thời gian bằng phút</string>
+	<string name="listfile_activity_title">Danh sách tập tin GPX đã tạo</string>
+	<string name="touch_activity_title">Nhấn lên màn hình để chọn điểm</string>
+	<string name="showtracking_activity_title">Đường đã đi của người dùng</string>
+	<string name="title_activity_buildroad">Tìm đường</string>
+	<string name="alert_dialog_two_buttons_title">Thoát chương trình?</string>
+	<string name="alert_dialog_ok">Đồng ý</string>
+	<string name="alert_dialog_cancel">Bỏ qua</string>
+	<string name="please_input_startpoint">Nhập điểm bắt đầu!!!</string>
+	<string name="please_input_endpoint">Nhập điểm kết thúc!!!</string>
+	<string name="please_input_time">Nhập thời gian!!!</string>
+	<string name="error_input_time">Thời gian phải lớn hơn 10 và nhỏ hơn 120 phút</string>
+	<string name="alert_dialog_single_choice">Chọn chế độ hiển thị</string>
+	<string name="trafficjam_activity_title">Dự đoán kẹt xe</string>
+	<string name="tap_to_choose">Chọn</string>
+	<string name="pointed_on_map">Đã chọn</string>
 </resources>
