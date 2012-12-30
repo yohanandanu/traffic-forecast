@@ -50,7 +50,7 @@ public class TouchPoint extends MapActivity {
 		listOfOverlays.add(mapOverlay);
 		this.scale =  getResources().getDisplayMetrics().density;
 		tap_Button = (Button) findViewById(R.id.imageButtonSelector);
-		tap_Button.setText("Tap To Chose");
+		tap_Button.setText(R.string.tap_to_choose);
 		tap_Button.setVisibility(View.GONE);
 		tap_Button.setOnClickListener(new OnClickListener() {
 
