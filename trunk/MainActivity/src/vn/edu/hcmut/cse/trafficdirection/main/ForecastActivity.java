@@ -29,7 +29,8 @@ public class ForecastActivity extends MapActivity {
 		setContentView(R.layout.activity_show_gpx);
 		
 		traffic_jam.clear();
-		traffic_jam.add(new GeoPoint(10770579, 106657963));
+		traffic_jam.add(new GeoPoint(10770450, 106658156));
+		traffic_jam.add(new GeoPoint(10777786, 106656140));
 
 		m_MapView = (MapView) findViewById(R.id.mapViewShowGPX);
 
@@ -54,7 +55,7 @@ public class ForecastActivity extends MapActivity {
 	class ForecastOverlay extends Overlay {
 		private int play_frame;
 		private final int n_frame = 20;
-		private final long DELAY = 40;//24 frame/s
+		private final long DELAY = 80;//24 frame/s
 		private final float MAX_RADIUS = (float) 30.0;
 		private long last_time;
 		private Projection project;
@@ -93,7 +94,7 @@ public class ForecastActivity extends MapActivity {
 				mPaint.setColor(Color.argb((int)(255 * (1.0 - play_frame / MAX_RADIUS)), 255, 0, 0));
 				if(time >= DELAY)
 				{
-					last_time = time;
+					last_time = System.currentTimeMillis();
 					play_frame++;
 					canvas.drawCircle(p.x, p.y, play_frame * (play_frame / MAX_RADIUS), mPaint);
 					m_MapView.postInvalidate();

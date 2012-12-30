@@ -489,16 +489,15 @@ public class MainActivity extends MapActivity {
 			}
 		} else if (mode != null && mode.equals("2")) {
 			if (Point1 != null) {
-				Log.d("Point1", Point1);
 				EditText et1 = (EditText) dialog.findViewById(R.id.et_start);
 				et1.setText("Point on Map");
 
 			}
 
 			if (Point2 != null) {
-				Log.d("Point2", Point2);
 				EditText et2 = (EditText) dialog.findViewById(R.id.et_end);
-				et2.setText("Point on Map");
+				et2.setText(Point2);
+				//et2.setText("Point on Map");
 			}
 		}
 	}
