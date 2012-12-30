@@ -117,7 +117,7 @@ public class MainActivity extends MapActivity {
 		// Se thay bang vi tri hien tai lay tu GPS
 
 		positionOverlay = new MyPositionOverlay();
-		positionOverlay.GPXOverlay(this);
+		positionOverlay.GPXOverlay(this , m_MapView);
 		List<Overlay> overlays = m_MapView.getOverlays();
 		overlays.add(positionOverlay);
 
