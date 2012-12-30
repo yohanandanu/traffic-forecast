@@ -235,8 +235,8 @@ public class MainActivity extends MapActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.settings:
-			Toast.makeText(getApplicationContext(), "Settings is Selected",
-					Toast.LENGTH_SHORT).show();
+//			Toast.makeText(getApplicationContext(), "Settings is Selected",
+//					Toast.LENGTH_SHORT).show();
 			startActivity(new Intent(MainActivity.this, Preferences.class));
 			break;
 		case R.id.buildRoute:
@@ -250,10 +250,6 @@ public class MainActivity extends MapActivity {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
-
-			// Toast.makeText(getApplicationContext(),
-			// "Build Route is Selected",
-			// Toast.LENGTH_SHORT).show();
 			dialog.setContentView(R.layout.dialog_directions_input);
 			dialog.setTitle(R.string.dialog_input_direct_title);
 
@@ -490,13 +486,13 @@ public class MainActivity extends MapActivity {
 		} else if (mode != null && mode.equals("2")) {
 			if (Point1 != null) {
 				EditText et1 = (EditText) dialog.findViewById(R.id.et_start);
-				et1.setText("Point on Map");
+				et1.setText(R.string.pointed_on_map);
 
 			}
 
 			if (Point2 != null) {
 				EditText et2 = (EditText) dialog.findViewById(R.id.et_end);
-				et2.setText(Point2);
+				et2.setText(R.string.pointed_on_map);
 				//et2.setText("Point on Map");
 			}
 		}
