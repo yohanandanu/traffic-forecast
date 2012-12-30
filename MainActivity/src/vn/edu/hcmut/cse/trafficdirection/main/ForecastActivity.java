@@ -88,7 +88,8 @@ public class ForecastActivity extends MapActivity {
 		}
 		public boolean draw(Canvas canvas, MapView mapView, boolean shadow,
 				long when) {
-			for(int i = 0; i < traffic_jam.size(); i++)
+			int size = traffic_jam.size();
+			for(int i = 0; i < size ; i++)
 			{
 				GeoPoint cur = traffic_jam.get(i);
 				
