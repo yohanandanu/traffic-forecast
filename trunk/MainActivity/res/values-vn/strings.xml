@@ -6,10 +6,10 @@
     <string name="build_route_menu">Tìm Đường</string>
     <string name="forecast_menu">Dự Báo</string>
     <string name="turn_power_menu">Theo Vết</string>
-    <string name="on">Bắt Đầu Theo Vết</string>
-    <string name="off">Bắt Đầu Theo Vết</string>
-    <string name="trackList_menu">Danh Sách Theo Dõi</string>
-    <string name="settings_menu">Cài Đặt Cấu Hình</string>
+    <string name="on">Bắt đầu theo vết</string>
+    <string name="off">Kết thúc theo vết</string>
+    <string name="trackList_menu">Danh sách theo dõi</string>
+    <string name="settings_menu">Cài đặt cấu hình</string>
     <string name="button_start">Bắt Đầu Theo Vết</string>
     <string name="button_stop">Dừng Theo Vết</string>
     <string name="menu_settings">Cài Đặt Cấu Hình</string>
