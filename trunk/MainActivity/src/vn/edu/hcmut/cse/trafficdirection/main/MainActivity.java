@@ -572,16 +572,7 @@ public class MainActivity extends MapActivity {
 		}
 	}
 	private void checkDatabaseExist(){
-
-		// Read map data and write to Database
 		new DatabaseHelper(this);
-
-		// md.getWritableDatabase().execSQL("DROP TABLE " +
-		// DatabaseHelper.NODE_TABLE_NAME);
-		// md.getWritableDatabase().execSQL("DROP TABLE " +
-		// DatabaseHelper.STREET_TABLE_NAME);
-		// md.onCreate(md.getWritableDatabase());
-
 		File tmp = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + PATH_TO_TMP_FILE);
 
