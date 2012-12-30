@@ -1,7 +1,5 @@
 package vn.edu.hcmut.cse.trafficdirection.overlay;
 
-import org.xml.sax.Parser;
-
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
@@ -18,13 +16,12 @@ import android.graphics.Canvas;
 import android.graphics.Point;
 import android.location.Location;
 import android.view.MotionEvent;
-import android.widget.Toast;
 
-public class MyPositionOverlay extends Overlay{
-	private MainActivity  mainActivity;
-	private MapView mapView;
+public class MyPositionOverlay extends Overlay {
+	private MainActivity mainActivity;
 	private boolean isDown = false;
 	private long time = 0;
+
 	/** Get the position location */
 	public Location getLocation() {
 		return location;
@@ -37,23 +34,20 @@ public class MyPositionOverlay extends Overlay{
 
 	Location location;
 
-	public void GPXOverlay(MainActivity mainActivity, MapView mapView){
+	public void GPXOverlay(MainActivity mainActivity, MapView mapView) {
 		this.mainActivity = mainActivity;
-		this.mapView = mapView;
 	}
 
 	public void draw(Canvas canvas, MapView mapView, boolean shadow) {
 		Projection projection = mapView.getProjection();
-		Double latitude=null;
-		Double longitude=null;
+		Double latitude = null;
+		Double longitude = null;
 		if (shadow == false) {
-			if( location == null){
-				
+			if (location == null) {
+
 				latitude = 10.770579 * 1E6;
 				longitude = 106.657963 * 1E6;
-			}
-			else
-			{
+			} else {
 				latitude = location.getLatitude() * 1E6;
 				longitude = location.getLongitude() * 1E6;
 			}
@@ -63,8 +57,8 @@ public class MyPositionOverlay extends Overlay{
 			projection.toPixels(geoPoint, point);
 			final float scale = mainActivity.getResources().getDisplayMetrics().density;
 			int dip = (int) (8 * scale);
-			Bitmap bmp1 = BitmapFactory.decodeResource(mainActivity.getResources(),
-					R.drawable.startpoint);
+			Bitmap bmp1 = BitmapFactory.decodeResource(
+					mainActivity.getResources(), R.drawable.startpoint);
 			canvas.drawBitmap(bmp1, point.x - dip, point.y - dip, null);
 		}
 		super.draw(canvas, mapView, shadow);
@@ -73,46 +67,71 @@ public class MyPositionOverlay extends Overlay{
 	public boolean onTap(GeoPoint point, MapView mapView) {
 		return false;
 	}
-	
-	public boolean onTouchEvent(MotionEvent event, MapView mapView) {
+
+	public boolean onTouchEvent(MotionEvent event, final MapView mapView) {
 		// ---when user lifts his finger---
-		if(System.currentTimeMillis() - time > 1000 && isDown)
-		{
-			
-			final Builder overlayDialog =new AlertDialog.Builder(mainActivity)
-			.setIcon(R.drawable.alert_dialog_icon);
-            overlayDialog.setTitle(R.string.alert_dialog_single_choice);
-            overlayDialog.setSingleChoiceItems(R.array.select_dialog_items2, 0, new DialogInterface.OnClickListener() {
-   
-            	
-                public void onClick(DialogInterface dialog, int whichButton) {
-                	
-                    /* User clicked on a radio button do some stuff */
-                }
-            })
-            .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
+		if (System.currentTimeMillis() - time > 1000 && isDown) {
 
-                	Toast.makeText(mainActivity.getApplicationContext(),"Build Route is Selected" +Integer.toString(whichButton),Toast.LENGTH_SHORT).show();
-                }
-            })
-            .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface dialog, int whichButton) {
+			final Builder overlayDialog = new AlertDialog.Builder(mainActivity);
+			final boolean[] select = { false, false };
+			overlayDialog.setIcon(R.drawable.alert_dialog_icon);
+			overlayDialog.setTitle(R.string.alert_dialog_single_choice);
+			overlayDialog
+					.setSingleChoiceItems(R.array.select_dialog_items2, 0,
+							new DialogInterface.OnClickListener() {
 
-                    /* User clicked No so do some stuff */
-                }
-            })
-           .create();
-            overlayDialog.show();
-			
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+									for (int i = 0; i < 2; i++)
+										select[i] = false;
+									select[whichButton] = true;
+								}
+							})
+					.setPositiveButton(R.string.alert_dialog_ok,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+									for (int i = 0; i < 2; i++) {
+										if (select[i] == true) {
+											switch (i) {
+											case 0:
+												mapView.setSatellite(false);
+												mapView.setTraffic(true);
+												break;
+											case 1:
+												mapView.setSatellite(true);
+												mapView.setTraffic(false);
+												break;
+											default:
+												break;
+											}
+											break;
+										}
+
+										if (i == 1) {
+											mapView.setSatellite(false);
+											mapView.setTraffic(true);
+										}
+									}
+									mapView.invalidate();
+								}
+							})
+					.setNegativeButton(R.string.alert_dialog_cancel,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int whichButton) {
+
+									/* User clicked No so do some stuff */
+								}
+							}).create();
+			overlayDialog.show();
+
 			isDown = false;
 		}
 		if (event.getAction() == MotionEvent.ACTION_DOWN) {
 			isDown = true;
 			time = System.currentTimeMillis();
-		}
-		else if(event.getAction() == MotionEvent.ACTION_UP)
-		{
+		} else if (event.getAction() == MotionEvent.ACTION_UP) {
 			isDown = false;
 		}
 		return false;
