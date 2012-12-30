@@ -100,7 +100,6 @@ public class GPXOverlay extends Overlay {
 				i = n - 1;
 		}
 		final float scale = activity.getResources().getDisplayMetrics().density;
-		// Log.v("dessssssssssssssssssssss", Float.toString(scale));
 		int dip = (int) (8 * scale);
 		cur = data.get(0);
 		Bitmap bmp1 = BitmapFactory.decodeResource(activity.getResources(),
