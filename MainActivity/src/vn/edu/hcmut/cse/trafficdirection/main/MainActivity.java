@@ -169,21 +169,6 @@ public class MainActivity extends MapActivity {
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 		}
 	};
-
-	/*
-	 * private void showGPX(String file) { // TODO Auto-generated method stub
-	 * GPXReader r = new GPXReader(file); r.readXMLfromResource(this);
-	 * 
-	 * try { r.parseStructure(); } catch (ParserConfigurationException e) {
-	 * e.printStackTrace(); }
-	 * 
-	 * GPXOverlay mapOverlay = new GPXOverlay(this, m_MapView, r.handler.data);
-	 * List<Overlay> listOfOverlay = m_MapView.getOverlays();
-	 * listOfOverlay.clear(); listOfOverlay.add(mapOverlay);
-	 * 
-	 * m_MapView.invalidate(); }
-	 */
-
 	private void showSettingsAlert() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
