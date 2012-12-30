@@ -172,36 +172,30 @@ public class MainActivity extends MapActivity {
 
 	private void showSettingsAlert() {
 		// TODO Auto-generated method stub
-		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
-				MainActivity.this);
+		final Dialog showSettingDialog = new AlertDialog.Builder(
+				MainActivity.this)
+				.setIcon(R.drawable.alert_dialog_icon)
+				.setTitle(R.string.setting_gps)
+				.setMessage(R.string.gps_not_enable_yet)
+				.setPositiveButton(R.string.menu_settings,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
 
-		// Setting Dialog Title
-		alertDialog.setTitle(R.string.setting_gps);
-
-		// Setting Dialog Message
-		alertDialog.setMessage(R.string.gps_not_enable_yet);
-
-		// On pressing Settings button
-		alertDialog.setPositiveButton("Settings",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						Intent intent = new Intent(
-								Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-						MainActivity.this.startActivity(intent);
-					}
-				});
-
-		// on pressing cancel button
-		alertDialog.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.cancel();
-					}
-				});
-
-		// Showing Alert Message
-		alertDialog.show();
-
+								Intent intent = new Intent(
+										Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+								MainActivity.this.startActivity(intent);
+							}
+						})
+				.setNegativeButton(R.string.alert_dialog_cancel,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int whichButton) {
+								dialog.dismiss();
+								/* User clicked Cancel so do some stuff */
+							}
+						}).create();
+		showSettingDialog.show();
 	}
 
 	@Override
