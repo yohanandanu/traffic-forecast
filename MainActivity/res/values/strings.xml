@@ -36,7 +36,7 @@
 	<string name="alert_dialog_cancel">Cancel</string>
 	<string name="please_input_startpoint">Please insert start point!!!</string>
 	<string name="please_input_endpoint">Please insert end point!!!</string>
-	<string name="please_input_time">Please enter the time!!!</string>
+	<string name="please_input_time">Please enter the time </string>
 	<string name="error_input_time">The time must between 10 and 120 minutes</string>
 	<string name="alert_dialog_single_choice">Select Map Mode</string>
 	<string name="trafficjam_activity_title">Traffic Jam Prediction</string>
