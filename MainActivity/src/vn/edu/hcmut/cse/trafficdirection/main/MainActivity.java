@@ -49,7 +49,7 @@ import android.widget.LinearLayout.LayoutParams;
 public class MainActivity extends MapActivity {
 	public static final String PATH_TO_FOLDER = "/TrafficDirection";
 	public static final String PATH_TO_TMP_FILE = PATH_TO_FOLDER + "/tmpFile";
-	
+
 	// Nhom GPS
 	protected static LocationManager locationManager;
 	public final static String KEY_GPS_DISTANCE_LOGGING_INTERVAL = "gps.distance.logging.interval";
@@ -60,7 +60,8 @@ public class MainActivity extends MapActivity {
 	public static final String KEY_SERVER_ADDRESS_INTERVAL = "gps.server.address.interval";
 	public final static String VAL_GPS_DISTANCE_LOGGING_INTERVAL = "10";
 	public final static String VAL_GPS_TIME_LOGGING_INTERVAL = "15";
-	public final static String VAL_EXTERNAL_STORAGE = PATH_TO_FOLDER + "/GPSTrackingFiles";
+	public final static String VAL_EXTERNAL_STORAGE = PATH_TO_FOLDER
+			+ "/GPSTrackingFiles";
 	public final static String VAL_SERVER_ADDRESS_INTERVAL = "300";
 
 	boolean isGPSEnabled = false;
@@ -117,7 +118,7 @@ public class MainActivity extends MapActivity {
 		// Se thay bang vi tri hien tai lay tu GPS
 
 		positionOverlay = new MyPositionOverlay();
-		positionOverlay.GPXOverlay(this , m_MapView);
+		positionOverlay.GPXOverlay(this, m_MapView);
 		List<Overlay> overlays = m_MapView.getOverlays();
 		overlays.add(positionOverlay);
 
@@ -145,10 +146,9 @@ public class MainActivity extends MapActivity {
 	private void checkDirectoryExist() {
 		// TODO Auto-generated method stub
 		File directory = new File(Environment.getExternalStorageDirectory()
-					.getAbsolutePath() + PATH_TO_FOLDER);
-		
-		if(!directory.isDirectory())
-		{
+				.getAbsolutePath() + PATH_TO_FOLDER);
+
+		if (!directory.isDirectory()) {
 			directory.mkdir();
 		}
 	}
@@ -169,6 +169,7 @@ public class MainActivity extends MapActivity {
 		public void onStatusChanged(String provider, int status, Bundle extras) {
 		}
 	};
+
 	private void showSettingsAlert() {
 		// TODO Auto-generated method stub
 		AlertDialog.Builder alertDialog = new AlertDialog.Builder(
@@ -220,8 +221,8 @@ public class MainActivity extends MapActivity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.settings:
-//			Toast.makeText(getApplicationContext(), "Settings is Selected",
-//					Toast.LENGTH_SHORT).show();
+			// Toast.makeText(getApplicationContext(), "Settings is Selected",
+			// Toast.LENGTH_SHORT).show();
 			startActivity(new Intent(MainActivity.this, Preferences.class));
 			break;
 		case R.id.buildRoute:
@@ -316,11 +317,24 @@ public class MainActivity extends MapActivity {
 					Intent it = new Intent(getApplicationContext(),
 							ForecastActivity.class);
 					Bundle extras = new Bundle();
-					Log.d("TIME", et.getText().toString());
-					extras.putString("TIME", et.getText().toString());
-					it.putExtras(extras);
-					startActivity(it);
-					dialogForecast.dismiss();
+
+					if (et.getText().toString().equalsIgnoreCase("")) {
+						Toast.makeText(getApplicationContext(),
+								R.string.please_input_time, Toast.LENGTH_SHORT)
+								.show();
+					} else {
+						int minutes = Integer.parseInt(et.getText().toString());
+						if (minutes < 10 || minutes > 120) {
+							Toast.makeText(getApplicationContext(),
+									R.string.error_input_time,
+									Toast.LENGTH_SHORT).show();
+						} else {
+							extras.putString("TIME", et.getText().toString());
+							it.putExtras(extras);
+							startActivity(it);
+							dialogForecast.dismiss();
+						}
+					}
 				}
 			});
 			dialogForecast.show();
@@ -478,7 +492,7 @@ public class MainActivity extends MapActivity {
 			if (Point2 != null) {
 				EditText et2 = (EditText) dialog.findViewById(R.id.et_end);
 				et2.setText(R.string.pointed_on_map);
-				//et2.setText("Point on Map");
+				// et2.setText("Point on Map");
 			}
 		}
 	}
@@ -552,7 +566,8 @@ public class MainActivity extends MapActivity {
 			mapController.animateTo(point);
 		}
 	}
-	private void checkDatabaseExist(){
+
+	private void checkDatabaseExist() {
 		new DatabaseHelper(this);
 		File tmp = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + PATH_TO_TMP_FILE);

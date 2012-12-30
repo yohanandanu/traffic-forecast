@@ -31,7 +31,27 @@ public class ForecastActivity extends MapActivity {
 		traffic_jam.clear();
 		traffic_jam.add(new GeoPoint(10770450, 106658156));
 		traffic_jam.add(new GeoPoint(10777786, 106656140));
-
+		traffic_jam.add(new GeoPoint(10768764,106652495));
+		traffic_jam.add(new GeoPoint(10768764,106652495));
+		traffic_jam.add(new GeoPoint(10776373,106663535));
+		traffic_jam.add(new GeoPoint(10767636,106667161));
+		traffic_jam.add(new GeoPoint(10767963,106667944));
+		traffic_jam.add(new GeoPoint(10763789,106660016));
+		traffic_jam.add(new GeoPoint(10762134,106656958));
+		traffic_jam.add(new GeoPoint(10759784,106668910));
+		traffic_jam.add(new GeoPoint(10767604,106674467));
+		traffic_jam.add(new GeoPoint(10782866,106672128));
+		traffic_jam.add(new GeoPoint(10790633,106652462));
+		traffic_jam.add(new GeoPoint(10792815,106653407));
+		traffic_jam.add(new GeoPoint(10794269,106650574));
+		traffic_jam.add(new GeoPoint(10796050,106647270));
+		traffic_jam.add(new GeoPoint(10798400,106642903));
+		traffic_jam.add(new GeoPoint(10771936,106657709));
+		traffic_jam.add(new GeoPoint(10772621,106660724));
+		traffic_jam.add(new GeoPoint(10773791,106661603));
+		traffic_jam.add(new GeoPoint(10767973,106658878));
+		
+		
 		m_MapView = (MapView) findViewById(R.id.mapViewShowGPX);
 
 		LinearLayout zoomLayout = (LinearLayout) findViewById(R.id.layout_MainMenuShowGPX);
