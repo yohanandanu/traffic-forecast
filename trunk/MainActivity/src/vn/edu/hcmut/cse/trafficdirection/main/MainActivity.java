@@ -47,8 +47,9 @@ import android.widget.Toast;
 import android.widget.LinearLayout.LayoutParams;
 
 public class MainActivity extends MapActivity {
-	public static final String PATH_TO_TMP_FILE = "/tmpFile";
-	public static final String PATH_TO_TMP_FOLDER = "/TrafficDirection";
+	public static final String PATH_TO_FOLDER = "/TrafficDirection";
+	public static final String PATH_TO_TMP_FILE = PATH_TO_FOLDER + "/tmpFile";
+	
 	// Nhom GPS
 	protected static LocationManager locationManager;
 	public final static String KEY_GPS_DISTANCE_LOGGING_INTERVAL = "gps.distance.logging.interval";
@@ -59,7 +60,7 @@ public class MainActivity extends MapActivity {
 	public static final String KEY_SERVER_ADDRESS_INTERVAL = "gps.server.address.interval";
 	public final static String VAL_GPS_DISTANCE_LOGGING_INTERVAL = "10";
 	public final static String VAL_GPS_TIME_LOGGING_INTERVAL = "15";
-	public final static String VAL_EXTERNAL_STORAGE = "/GPSTrackingFiles";
+	public final static String VAL_EXTERNAL_STORAGE = PATH_TO_FOLDER + "/GPSTrackingFiles";
 	public final static String VAL_SERVER_ADDRESS_INTERVAL = "300";
 
 	boolean isGPSEnabled = false;
@@ -95,6 +96,7 @@ public class MainActivity extends MapActivity {
 		super.onCreate(savedInstanceState);
 		Log.d("Start", "Start");
 		setContentView(R.layout.activity_main);
+		checkDirectoryExist();
 		checkDatabaseExist();
 		dialog = new Dialog(MainActivity.this, R.style.DialogTitleStyle);
 		m_MapView = (MapView) findViewById(R.id.mapView);
@@ -138,6 +140,17 @@ public class MainActivity extends MapActivity {
 			updateWithNewLocation(location);
 		if (!isGPSEnabled)
 			showSettingsAlert();
+	}
+
+	private void checkDirectoryExist() {
+		// TODO Auto-generated method stub
+		File directory = new File(Environment.getExternalStorageDirectory()
+					.getAbsolutePath() + PATH_TO_FOLDER);
+		
+		if(!directory.isDirectory())
+		{
+			directory.mkdir();
+		}
 	}
 
 	private final LocationListener locationListener = new LocationListener() {
@@ -320,7 +333,7 @@ public class MainActivity extends MapActivity {
 			dlButton.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
 					Intent it = new Intent(getApplicationContext(),
-							TouchPoint.class);
+							ForecastActivity.class);
 					Bundle extras = new Bundle();
 					Log.d("TIME", et.getText().toString());
 					extras.putString("TIME", et.getText().toString());
