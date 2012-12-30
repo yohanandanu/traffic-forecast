@@ -24,7 +24,7 @@
 	<string name="setting_gps">Setting GPS</string>
 	<string name="gps_not_enable_yet">GPS is not enabled. Do you want to go to settings menu?</string>
 	<string name="tracking_controls">Tracking Controls</string>
-	<string name="text_minutes">minutes</string>
+	<string name="text_minutes">Minutes</string>
 	<string name="dialog_forecast_ok">OK</string>
 	<string name="dialog_forecast_title">Enter the time in minutes</string>
 	<string name="listfile_activity_title">List Files GPX Tracking</string>
