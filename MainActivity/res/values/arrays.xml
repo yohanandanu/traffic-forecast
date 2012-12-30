@@ -16,7 +16,6 @@
 
 <resources>    
     <string-array name="select_dialog_items2">
-        <item>Street view</item>
          <item>Traffic</item>
         <item>Satellite</item>     
         
