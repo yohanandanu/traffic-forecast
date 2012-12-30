@@ -39,5 +39,8 @@
 	<string name="please_input_time">Please enter the time!!!</string>
 	<string name="error_input_time">The time must in 10 and 120 minutes</string>
 	<string name="alert_dialog_single_choice">Single choice list</string>
+	<string name="trafficjam_activity_title">Trafficjam Prediction</string>
+	<string name="tap_to_choose">Choose</string>
+	<string name="pointed_on_map">Pointed on Map</string>
 	
 </resources>
