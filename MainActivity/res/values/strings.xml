@@ -38,5 +38,6 @@
 	<string name="please_input_endpoint">Please insert end point!!!</string>
 	<string name="please_input_time">Please enter the time!!!</string>
 	<string name="error_input_time">The time must in 10 and 120 minutes</string>
+	<string name="alert_dialog_single_choice">Single choice list</string>
 	
 </resources>
