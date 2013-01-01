@@ -376,21 +376,21 @@ public class MainActivity extends MapActivity {
 			// Toast.makeText(getApplicationContext(),
 			// "Show Current is Selected",
 			// Toast.LENGTH_SHORT).show();
-			final Dialog overlayDialog = new Dialog(MainActivity.this,
-					R.style.DialogTitleStyle);
-			overlayDialog.setContentView(R.layout.dialog_overlay);
-			overlayDialog.setTitle(R.string.show_current_dialog_title);
-			Button okButton = (Button) overlayDialog.findViewById(R.id.btnOk);
-
-			okButton.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					RadioGroup radioSexGroup = (RadioGroup) overlayDialog
-							.findViewById(R.id.radioOverlay);
-					int selectedId = radioSexGroup.getCheckedRadioButtonId();
-					if (selectedId == R.id.radioVelocity)
-						m_iOverlayType = OVERLAY_V;
-					else
-						m_iOverlayType = OVERLAY_D;
+//			final Dialog overlayDialog = new Dialog(MainActivity.this,
+//					R.style.DialogTitleStyle);
+//			overlayDialog.setContentView(R.layout.dialog_overlay);
+//			overlayDialog.setTitle(R.string.show_current_dialog_title);
+//			Button okButton = (Button) overlayDialog.findViewById(R.id.btnOk);
+//
+//			okButton.setOnClickListener(new OnClickListener() {
+//				public void onClick(View v) {
+//					RadioGroup radioSexGroup = (RadioGroup) overlayDialog
+//							.findViewById(R.id.radioOverlay);
+//					int selectedId = radioSexGroup.getCheckedRadioButtonId();
+//					if (selectedId == R.id.radioVelocity)
+//						m_iOverlayType = OVERLAY_V;
+//					else
+//						m_iOverlayType = OVERLAY_D;
 
 					// showCurrent(m_iOverlayType);
 					Intent it = new Intent(getApplicationContext(),
@@ -400,11 +400,11 @@ public class MainActivity extends MapActivity {
 					it.putExtras(extras);
 					startActivity(it);
 
-					overlayDialog.hide();
-				}
-			});
-
-			overlayDialog.show();
+//					overlayDialog.hide();
+//				}
+//			});
+//
+//			overlayDialog.show();
 			break;
 		case R.id.trackList:
 			// Toast.makeText(getApplicationContext(), "Track",
