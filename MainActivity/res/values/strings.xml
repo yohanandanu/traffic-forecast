@@ -42,5 +42,6 @@
 	<string name="trafficjam_activity_title">Traffic Jam Prediction</string>
 	<string name="tap_to_choose">Choose</string>
 	<string name="pointed_on_map">Pointed on Map</string>
+	<string name="cannot_connect_to_server">Cannot connect to server</string>
 	
 </resources>
