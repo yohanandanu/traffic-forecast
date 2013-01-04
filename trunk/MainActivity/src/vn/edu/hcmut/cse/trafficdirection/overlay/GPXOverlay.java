@@ -84,8 +84,8 @@ public class GPXOverlay extends Overlay {
 
 				speed *= 3.6;
 
-				int redColor = (int) ((1.0 - speed / 30.0) * 255);
-				int greenColor = (int) ((speed / 30.0) * 255);
+				int redColor = (int) ((1.0 - speed / 40.0) * 255);
+				int greenColor = (int) ((speed / 40.0) * 255);
 
 				mPaint.setColor(Color.argb(100, redColor, greenColor, 0));
 
