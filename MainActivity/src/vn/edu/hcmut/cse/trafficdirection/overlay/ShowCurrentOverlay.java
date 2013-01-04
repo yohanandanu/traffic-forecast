@@ -75,8 +75,7 @@ public class ShowCurrentOverlay extends Overlay {
 						if (pre == cur)
 							break;
 
-						double speed = (Double.parseDouble(pre.getSpeed()) + Double
-								.parseDouble(cur.getSpeed())) / 2.0;
+						int speed = (int) ((Integer.parseInt(pre.getSpeed()) + Integer.parseInt(cur.getSpeed())) / 2.0);
 
 						Paint mPaint = new Paint();
 
@@ -101,8 +100,8 @@ public class ShowCurrentOverlay extends Overlay {
 						project.toPixels(gp1, p1);
 						project.toPixels(gp2, p2);
 
-						int redColor = (int) ((1.0 - speed / 30.0) * 255);
-						int greenColor = (int) ((speed / 30.0) * 255);
+						int redColor = (int) ((1.0 - speed / 40.0) * 255);
+						int greenColor = (int) ((speed / 40.0) * 255);
 
 						mPaint.setColor(Color
 								.argb(100, redColor, greenColor, 0));
