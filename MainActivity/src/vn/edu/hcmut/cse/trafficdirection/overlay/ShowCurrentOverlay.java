@@ -75,8 +75,8 @@ public class ShowCurrentOverlay extends Overlay {
 						if (pre == cur)
 							break;
 
-						int speed = (int) ((Integer.parseInt(pre.getSpeed()) + Integer.parseInt(cur.getSpeed())) / 2.0);
-
+						double speed = (Double.parseDouble(pre.getSpeed()) + Double
+								.parseDouble(cur.getSpeed())) / 2.0;
 						Paint mPaint = new Paint();
 
 						mPaint.setAntiAlias(true);
