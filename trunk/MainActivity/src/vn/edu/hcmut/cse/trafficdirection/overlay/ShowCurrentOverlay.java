@@ -51,7 +51,7 @@ public class ShowCurrentOverlay extends Overlay {
 
 		if (m_iOverlayType == MainActivity.OVERLAY_V) {
 
-			int step = 1;// 21 - mapView.getZoomLevel();
+			int step = 21 - mapView.getZoomLevel();
 
 			for (int i = 0; i < streetList.size(); i++) {
 				if (mapView.getZoomLevel() > 17) {
