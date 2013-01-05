@@ -13,6 +13,7 @@ import vn.edu.hcmut.cse.trafficdirection.overlay.ShowCurrentOverlay;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
@@ -46,6 +47,7 @@ public class ShowCurrentActivity extends MapActivity {
 
 	private DatabaseHelper md;
 	private TCPClient tcpClient = null;
+	Display display = null;
 
 	@SuppressWarnings("deprecation")
 	public void onCreate(Bundle savedInstanceState) {
@@ -74,10 +76,12 @@ public class ShowCurrentActivity extends MapActivity {
 				m_CurrentLocation = m_MapView.getMapCenter();
 				// if(isShowCurrent)
 				// updateStreet();
-				// Log.d("CenterPoint", m_CurrentLocation.toString());
+				Log.d("CenterPoint", m_CurrentLocation.toString());
 				return false;
 			}
 		});
+		
+		display = getWindowManager().getDefaultDisplay();
 
 		md = new DatabaseHelper(this);
 
@@ -117,14 +121,26 @@ public class ShowCurrentActivity extends MapActivity {
 			streetList.clear();
 		else
 			streetList2.clear();
-
-		int l = m_MapView.getZoomLevel();
-		double latDouble = m_CurrentLocation.getLatitudeE6() / 1E6;
-		double lonDouble = m_CurrentLocation.getLongitudeE6() / 1E6;
-		double latMin = latDouble - height[l] / 2;
-		double latMax = latDouble + height[l] / 2;
-		double lonMin = lonDouble - width[l] / 2;
-		double lonMax = lonDouble + width[l] / 2;
+		
+		GeoPoint top = m_MapView.getProjection().fromPixels(0, 0);
+		GeoPoint bottom = m_MapView.getProjection().fromPixels(display.getWidth(), display.getHeight());//latDouble - height[l] / 2;
+		double latMin = bottom.getLatitudeE6() / 1E6;
+		Log.d("latMin", latMin + "");
+		double latMax = top.getLatitudeE6() / 1E6;
+		Log.d("latMax", latMax + "");
+		double lonMin = top.getLongitudeE6() / 1E6;
+		Log.d("lonMin", lonMin + "");
+		double lonMax = bottom.getLongitudeE6() / 1E6;
+		Log.d("lonMax", lonMax + "");
+		
+		double distanceLat = latMax - latMin;
+		latMin -= distanceLat * 0.2;
+		latMax += distanceLat * 0.2;
+		
+		double distanceLon = lonMax - lonMin;
+		lonMin -= distanceLon * 0.2;
+		lonMax += distanceLon * 0.2;
+		
 		String sql = "SELECT * FROM " + DatabaseHelper.NODE_TABLE_NAME
 				+ " WHERE Lat <= " + latMax + " AND Lat >= " + latMin
 				+ " AND Lon <= " + lonMax + " AND Lon >= " + lonMin;
@@ -202,6 +218,8 @@ public class ShowCurrentActivity extends MapActivity {
 		super.onStop();
 		Log.d("OnStop", "STOP");
 		timer.cancel();
+		//tcpClient.stop();
+		//md.close();
 	}
 
 	private void updatePosition() {

@@ -12,7 +12,6 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
 
 import vn.edu.hcmut.cse.trafficdirection.database.DatabaseHelper;
 
@@ -21,11 +20,11 @@ public class TCPClient extends Thread {
 	public DatagramSocket socket = null;
 	private DatabaseHelper md;
 	public PrintWriter out;
-	public ArrayList<String> stack = new ArrayList<String>();
+	//public ArrayList<String> stack = new ArrayList<String>();
 
 	public TCPClient(DatabaseHelper md) {
 		this.md = md;
-		stack.clear();
+		//stack.clear();
 	}
 
 	public void run() {
@@ -33,12 +32,14 @@ public class TCPClient extends Thread {
 			// InetAddress serverAddr =
 			//InetAddress.getByName("www.vre.cse.hcmut.edu.vn");
 
-			// InetAddress serverAddr = InetAddress.getByName("10.0.2.2");
-			InetAddress serverAddr = InetAddress.getByName("192.168.2.1");
+			 InetAddress serverAddr = InetAddress.getByName("10.0.2.2");
+			//InetAddress serverAddr = InetAddress.getByName("192.168.2.1");
 
 			Socket socket = new Socket(serverAddr, 6655);
 
 			String update = "";
+			
+			System.out.println("Run");
 
 			out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(
 					socket.getOutputStream())), true);
@@ -58,10 +59,7 @@ public class TCPClient extends Thread {
 				}
 			}
 		} catch (UnknownHostException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
 	}
 
