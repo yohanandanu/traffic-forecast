@@ -33,7 +33,7 @@
         </activity>
         <activity android:name=".ShowCurrentActivity"  android:label="@string/traffic_infor_activity_title" >
         </activity>
-        <activity android:name=".ForecastActivity"  android:label="@string/showtracking_activity_title" >
+        <activity android:name=".ForecastActivity"  android:label="@string/trafficjam_activity_title" >
         </activity>
         
         
