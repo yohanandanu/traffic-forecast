@@ -44,5 +44,6 @@
 	<string name="pointed_on_map">Pointed on Map</string>
 	<string name="cannot_connect_to_server">Cannot connect to server</string>
 	<string name="traffic_infor_activity_title">Current State Of Traffic</string>
+	<string name="build_road_activity_title">Direction Found</string>
 	
 </resources>
