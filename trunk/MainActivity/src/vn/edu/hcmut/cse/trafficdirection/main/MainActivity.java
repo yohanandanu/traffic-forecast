@@ -335,7 +335,7 @@ public class MainActivity extends MapActivity {
 							long time = Long.parseLong(et.getText().toString());
 							time = time*60*1000 + System.currentTimeMillis();
 							startActivity(it);
-							TCPClient.getSingletonObject().out.println(time +"");
+							TCPClient.getSingletonObject().out.println("FORECAST:"+time +"");
 							dialogForecast.dismiss();
 						}
 					}
