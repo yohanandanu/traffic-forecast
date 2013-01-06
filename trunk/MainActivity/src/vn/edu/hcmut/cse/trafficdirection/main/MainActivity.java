@@ -12,6 +12,7 @@ import java.util.List;
 import vn.edu.hcmut.cse.trafficdirection.database.DatabaseHelper;
 
 import vn.edu.hcmut.cse.trafficdirection.main.R;
+import vn.edu.hcmut.cse.trafficdirection.network.TCPClient;
 import vn.edu.hcmut.cse.trafficdirection.overlay.MyPositionOverlay;
 
 import com.google.android.maps.GeoPoint;
@@ -87,6 +88,8 @@ public class MainActivity extends MapActivity {
 	File streetSQLFile = null;
 
 	public int zoomLevel;
+	
+	private DatabaseHelper md;
 
 	// private Random r;
 
@@ -97,6 +100,7 @@ public class MainActivity extends MapActivity {
 		Log.d("Start", "Start");
 		setContentView(R.layout.activity_main);
 		checkDirectoryExist();
+		md = new DatabaseHelper(this);
 		checkDatabaseExist();
 		dialog = new Dialog(MainActivity.this, R.style.DialogTitleStyle);
 		m_MapView = (MapView) findViewById(R.id.mapView);
@@ -140,6 +144,9 @@ public class MainActivity extends MapActivity {
 			updateWithNewLocation(location);
 		if (!isGPSEnabled)
 			showSettingsAlert();
+		
+		TCPClient.getSingletonObject().setDatabase(md);
+		TCPClient.getSingletonObject().start();
 	}
 
 	private void checkDirectoryExist() {
@@ -264,6 +271,7 @@ public class MainActivity extends MapActivity {
 								R.string.please_input_endpoint,
 								Toast.LENGTH_SHORT).show();
 					} else {
+						TCPClient.getSingletonObject().out.println("BULIDROAD:" + Point1.toString() + ":" + Point2.toString());
 						Intent it = new Intent(getApplicationContext(),
 								ShowBuildRouteActivity.class);
 						Bundle extras = new Bundle();
@@ -324,7 +332,10 @@ public class MainActivity extends MapActivity {
 						} else {
 							extras.putString("TIME", et.getText().toString());
 							it.putExtras(extras);
+							long time = Long.parseLong(et.getText().toString());
+							time = time*60*1000 + System.currentTimeMillis();
 							startActivity(it);
+							TCPClient.getSingletonObject().out.println(time +"");
 							dialogForecast.dismiss();
 						}
 					}
@@ -561,7 +572,6 @@ public class MainActivity extends MapActivity {
 	}
 
 	private void checkDatabaseExist() {
-		new DatabaseHelper(this);
 		File tmp = new File(Environment.getExternalStorageDirectory()
 				.getAbsolutePath() + PATH_TO_TMP_FILE);
 
