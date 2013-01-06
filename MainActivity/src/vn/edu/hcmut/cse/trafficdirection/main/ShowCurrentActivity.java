@@ -83,10 +83,11 @@ public class ShowCurrentActivity extends MapActivity {
 		
 		display = getWindowManager().getDefaultDisplay();
 
-		md = new DatabaseHelper(this);
+		md = TCPClient.getSingletonObject().md;
 
-		tcpClient = new TCPClient(md);
-		tcpClient.start();
+		tcpClient = TCPClient.getSingletonObject();
+		//tcpClient = new TCPClient(md);
+		//tcpClient.start();
 
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {

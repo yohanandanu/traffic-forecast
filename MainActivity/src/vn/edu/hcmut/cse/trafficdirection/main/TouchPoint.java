@@ -127,8 +127,8 @@ public class TouchPoint extends MapActivity {
 				RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
 						LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
-				rel_btn.leftMargin = x - 50;
-				rel_btn.topMargin = y - 50;
+				rel_btn.leftMargin = x - dip(50);
+				rel_btn.topMargin = y - dip(50);
 				rel_btn.width = dip(100);// tap_Button.getWidth();
 				rel_btn.height = dip(50);// tap_Button.getHeight();
 

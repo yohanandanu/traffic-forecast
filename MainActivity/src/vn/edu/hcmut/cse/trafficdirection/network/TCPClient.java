@@ -17,8 +17,9 @@ import vn.edu.hcmut.cse.trafficdirection.database.DatabaseHelper;
 
 public class TCPClient extends Thread {
 
+	private static TCPClient singletonObject = null;
 	public DatagramSocket socket = null;
-	private DatabaseHelper md;
+	public DatabaseHelper md;
 	public PrintWriter out;
 	//public ArrayList<String> stack = new ArrayList<String>();
 
@@ -26,13 +27,29 @@ public class TCPClient extends Thread {
 		this.md = md;
 		//stack.clear();
 	}
+	
+	public TCPClient() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public void setDatabase(DatabaseHelper md)
+	{
+		this.md = md;
+	}
+
+	public static TCPClient getSingletonObject() {
+		if (singletonObject == null) {
+			singletonObject = new TCPClient();
+		}
+		return singletonObject;
+	}
 
 	public void run() {
 		try {
 			// InetAddress serverAddr =
 			//InetAddress.getByName("www.vre.cse.hcmut.edu.vn");
 
-			 InetAddress serverAddr = InetAddress.getByName("10.0.2.2");
+			InetAddress serverAddr = InetAddress.getByName("10.0.2.2");
 			//InetAddress serverAddr = InetAddress.getByName("192.168.2.1");
 
 			Socket socket = new Socket(serverAddr, 6655);
