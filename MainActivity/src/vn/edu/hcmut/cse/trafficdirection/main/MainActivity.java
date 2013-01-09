@@ -271,7 +271,10 @@ public class MainActivity extends MapActivity {
 								R.string.please_input_endpoint,
 								Toast.LENGTH_SHORT).show();
 					} else {
-						TCPClient.getSingletonObject().out.println("BULIDROAD:" + Point1.toString() + ":" + Point2.toString());
+						if(TCPClient.getSingletonObject() != null && TCPClient.getSingletonObject().out != null)
+						{
+							TCPClient.getSingletonObject().out.println("BULIDROAD:" + Point1.toString() + ":" + Point2.toString());
+						}
 						Intent it = new Intent(getApplicationContext(),
 								ShowBuildRouteActivity.class);
 						Bundle extras = new Bundle();
@@ -335,7 +338,8 @@ public class MainActivity extends MapActivity {
 							long time = Long.parseLong(et.getText().toString());
 							time = time*60*1000 + System.currentTimeMillis();
 							startActivity(it);
-							TCPClient.getSingletonObject().out.println("FORECAST:"+time +"");
+							if(TCPClient.getSingletonObject() != null && TCPClient.getSingletonObject().out != null)
+								TCPClient.getSingletonObject().out.println("FORECAST:"+time +"");
 							dialogForecast.dismiss();
 						}
 					}
