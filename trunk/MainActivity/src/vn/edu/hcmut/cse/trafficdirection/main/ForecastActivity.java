@@ -2,12 +2,14 @@ package vn.edu.hcmut.cse.trafficdirection.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -22,6 +24,7 @@ import com.google.android.maps.Projection;
 public class ForecastActivity extends MapActivity {
 	private MapView m_MapView = null;
 	private ArrayList<GeoPoint> traffic_jam = new ArrayList<GeoPoint>();
+	private ArrayList<GeoPoint> traffic_jam_draw = new ArrayList<GeoPoint>();
 
 	@SuppressWarnings("deprecation")
 	public void onCreate(Bundle savedInstanceState) {
@@ -134,6 +137,8 @@ public class ForecastActivity extends MapActivity {
 		private final long DELAY = 80;//24 frame/s
 		private final float MAX_RADIUS = (float) 30.0;
 		private long last_time;
+		private long timer;
+		private Random r;
 		private Projection project;
 		
 		public ForecastOverlay()
@@ -141,13 +146,37 @@ public class ForecastActivity extends MapActivity {
 			play_frame = 0;
 			last_time = 0;
 			project = m_MapView.getProjection();
+			timer = System.currentTimeMillis();
+			r = new Random();
+			
+			traffic_jam_draw.clear();
+			timer = System.currentTimeMillis();
+			for(int i = 0; i < traffic_jam.size() ; i++)
+			{
+				if(r.nextDouble() >= 0.5)
+					traffic_jam_draw.add(traffic_jam.get(i));
+			}
 		}
 		public boolean draw(Canvas canvas, MapView mapView, boolean shadow,
 				long when) {
 			int size = traffic_jam.size();
-			for(int i = 0; i < size ; i++)
+			
+			if(System.currentTimeMillis() - timer >= 60000)
 			{
-				GeoPoint cur = traffic_jam.get(i);
+				traffic_jam_draw.clear();
+				timer = System.currentTimeMillis();
+				for(int i = 0; i < size ; i++)
+				{
+					if(r.nextDouble() >= 0.5)
+						traffic_jam_draw.add(traffic_jam.get(i));
+				}
+				Log.d("Forecast", traffic_jam_draw.size() + "");
+			}
+			
+			
+			for(int i = 0; i < traffic_jam_draw.size() ; i++)
+			{
+				GeoPoint cur = traffic_jam_draw.get(i);
 				
 				Paint mPaint = new Paint();
 

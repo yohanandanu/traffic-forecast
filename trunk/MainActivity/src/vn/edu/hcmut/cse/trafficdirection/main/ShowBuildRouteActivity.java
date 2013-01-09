@@ -2,11 +2,13 @@ package vn.edu.hcmut.cse.trafficdirection.main;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import vn.edu.hcmut.cse.trafficdirection.node.NodeGPS;
 import vn.edu.hcmut.cse.trafficdirection.overlay.GPXOverlay;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
@@ -17,6 +19,7 @@ import com.google.android.maps.MapView;
 import com.google.android.maps.Overlay;
 
 public class ShowBuildRouteActivity extends MapActivity {
+	
 	private MapView m_MapView = null;
 	private String Point1 = null;
 	private String Point2 = null;
@@ -28,21 +31,34 @@ public class ShowBuildRouteActivity extends MapActivity {
 		setContentView(R.layout.activity_build_route);
 
 		data = new ArrayList<NodeGPS>();
+		Random r = new Random();
 
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			Point1 = extras.getString("POINT1");
 			Point2 = extras.getString("POINT2");
 
-			double lat = Double.parseDouble(Point1.split(",")[0]) / 1E6;
-			double lon = Double.parseDouble(Point1.split(",")[1]) / 1E6;
-			NodeGPS p1 = new NodeGPS(lat, lon);
-			data.add(p1);
+			double startLat = Double.parseDouble(Point1.split(",")[0]) / 1E6;
+			double startLon = Double.parseDouble(Point1.split(",")[1]) / 1E6;
 
-			lat = Double.parseDouble(Point2.split(",")[0]) / 1E6;
-			lon = Double.parseDouble(Point2.split(",")[1]) / 1E6;
-			NodeGPS p2 = new NodeGPS(lat, lon);
-			data.add(p2);
+			double endLat = Double.parseDouble(Point2.split(",")[0]) / 1E6;
+			double endLon = Double.parseDouble(Point2.split(",")[1]) / 1E6;
+			
+			double deltaLat = endLat - startLat;
+			double deltaLon = endLon - startLon;
+			
+			for(int i = 0; i < 30; i++)
+			{
+				double intermediateLat = startLat + i * deltaLat / 30;
+				double intermediateLon = startLon + i * deltaLon / 30;
+				
+				NodeGPS intermediatePoint = new NodeGPS(intermediateLat, intermediateLon);
+				double speed = (r.nextDouble() * 30.0 + 10.0) / 3.6;
+				intermediatePoint.setSpeed(speed + "");
+				Log.d("speed", speed + "");
+				data.add(intermediatePoint);
+			}
+			
 		}
 
 		m_MapView = (MapView) findViewById(R.id.mapViewBuildRoute);
