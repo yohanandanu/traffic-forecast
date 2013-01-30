@@ -1,3 +1,4 @@
+keytool -list -alias androiddebugkey -keystore C:\Users\TA06\.android\debug.keystore -storepass android -keypass android
 <!-- Google Key in Windows 7 64bit licensed  -->
   <com.google.android.maps.MapView
                  android:layout_width="fill_parent"
