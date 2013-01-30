@@ -1,0 +1,56 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="vn.edu.hcmut.cse.trafficdirection.main"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-sdk
+        android:minSdkVersion="10"
+        android:targetSdkVersion="17" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <uses-library android:name="com.google.android.maps" />
+
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/main_activity_title_bar" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AndroidListFilesActivity" android:label="@string/listfile_activity_title">
+        </activity>
+        <activity android:name=".TouchPoint"  android:label="@string/touch_activity_title" >
+        </activity>
+        <activity android:name=".ShowBuildRouteActivity"  android:label="@string/build_road_activity_title" >
+        </activity>
+            <activity android:name=".ShowGPXActivity"  android:label="@string/showtracking_activity_title" >
+        </activity>
+        <activity android:name=".ShowCurrentActivity"  android:label="@string/traffic_infor_activity_title" >
+        </activity>
+        <activity android:name=".ForecastActivity"  android:label="@string/trafficjam_activity_title" >
+        </activity>
+        
+        
+        <activity
+            android:name=".Preferences"
+            android:label="@string/prefs" />
+
+        <service
+            android:name=".GPSService"
+            android:enabled="true" />
+    </application>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+</manifest>

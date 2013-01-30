@@ -1,0 +1,6 @@
+<!-- Google Key in Windows 7 64bit licensed  -->
+  <com.google.android.maps.MapView
+                 android:layout_width="fill_parent"
+                 android:layout_height="fill_parent"
+                 android:apiKey="0jypXSpwnkmE69mBBrSTV77yzboBhmu9yQNywjg"
+                 />
